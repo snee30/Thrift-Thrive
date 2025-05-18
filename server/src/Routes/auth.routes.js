@@ -1,12 +1,15 @@
 // define URL paths like /login, /signup, and what functions should run when someone visits those URLs.import express from "express";
 
 import { login, signup } from "../Controller/buyerAuth.controller.js";
+import signupSeller from "../Controller/sellerAuth.controller.js";
 import { isAuth } from "../Middleware/auth.middle.js";
 
 const router = express.Router();
 
 router.post("/buyer/signup", signup);
 router.post("/buyer/login", login);
+
+router.post("/seller/signup", signupSeller);
 
 router.get("/me", isAuth, async (req, res) => {
   try {
