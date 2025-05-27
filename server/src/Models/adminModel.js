@@ -1,38 +1,28 @@
-// defines the structure of a buyer's data (like name, email, password).
-
-import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 
-const buyerSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
+
     email: {
       type: String,
       required: true,
       unique: true,
     },
+
     password: {
       type: String,
       required: true,
     },
-    phone: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-buyerSchema.pre("save", async function (next) {
+adminSchema.pre("save", async function (next) {
   //dui choti modify nahos
   if (!this.isModified("password")) {
     return next();
@@ -43,10 +33,10 @@ buyerSchema.pre("save", async function (next) {
 });
 
 //match w user pw
-buyerSchema.methods.comparePW = async function (password) {
+adminSchema.methods.comparePW = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const Buyer = mongoose.model("Buyer", buyerSchema);
+const Admin = mongoose.model("Admin", adminSchema);
 
-export default Buyer;
+export default Admin;
