@@ -4,6 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./Routes/auth.routes.js";
 import sellerRoutes from "./Routes/seller.route.js";
+import adminRoutes from "./Routes/admin.routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -23,6 +24,8 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/seller", sellerRoutes);
+
+app.use("/api/admin", adminRoutes);
 // app.use("/auth/buyer", buyerAuthRoutes);
 
 const PORT = process.env.PORT;

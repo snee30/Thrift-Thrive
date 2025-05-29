@@ -2,6 +2,14 @@ import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
 const sellerSchema = new mongoose.Schema({
+  image: {
+    type: String,
+    default: "",
+  },
+  cloudinaryImageId: {
+    type: String,
+    default: "",
+  },
   name: {
     type: String,
     required: true,
@@ -15,6 +23,10 @@ const sellerSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female", "others"],
   },
   address: {
     type: String,

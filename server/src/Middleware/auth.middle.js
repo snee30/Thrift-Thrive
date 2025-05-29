@@ -254,6 +254,11 @@ export const isAdmin = async (req, res, next) => {
           message: "Token is not associated to any buyer",
         });
       }
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: "Unauthorized because Not A Admin",
+      });
     }
     next();
   } catch (err) {
