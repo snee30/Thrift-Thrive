@@ -197,6 +197,11 @@ export const isSeller = async (req, res, next) => {
           message: "Token is not associated to any buyer",
         });
       }
+    } else {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied - Not a seller",
+      });
     }
     next();
   } catch (err) {

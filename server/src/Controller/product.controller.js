@@ -13,7 +13,7 @@ export const addProduct = async (req, res) => {
     }
 
     const product = new Product({
-      seller: "1",
+      seller: req.seller._id,
       name,
       type,
       price,
