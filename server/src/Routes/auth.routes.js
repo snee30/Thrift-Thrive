@@ -1,35 +1,28 @@
 // define URL paths like /login, /signup, and what functions should run when someone visits those URLs.import express from "express";
 
-import { login, signup } from "../Controller/buyerAuth.controller.js";
+import { Router } from "express";
 import { isAuth } from "../Middleware/auth.middle.js";
+import {
+  adminLogin,
+  adminRegister,
+  buyerLogin,
+  buyerSignup,
+  checkAuth,
+  sellerLogin,
+  sellerSignup,
+} from "../Controller/auth.controller.js";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/buyer/signup", signup);
-router.post("/buyer/login", login);
+router.post("/buyer/signup", buyerSignup);
+router.post("/buyer/login", buyerLogin);
 
-router.get("/me", isAuth, async (req, res) => {
-  try {
-    if (!req.user || !req.role) {
-      return res.status(401).json({
-        success: false,
-        message: "Unauthorized. Please log in.",
-      });
-    }
-    if (req.role === "buyer") {
-      res.status(200).json({
-        success: true,
-        buyer: req.user,
-        role: req.role,
-      });
-    }
-  } catch (error) {
-    console.error("Error in /api/auth/me:", error);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-  }
-});
+router.post("/seller/signup", sellerSignup);
+router.post("/seller/login", sellerLogin);
+
+router.post("/admin/register", adminRegister);
+router.post("/admin/login", adminLogin);
+
+router.get("/me", isAuth, checkAuth);
 
 export default router;
