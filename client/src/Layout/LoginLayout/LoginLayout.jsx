@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import { authState } from "../../GlobalState/authState";
 
@@ -18,7 +18,7 @@ const LoginLayout = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-beige to-sage w-full pt-20">
-      <div className="bg-sage gap-3 p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md">
+      <div className="bg-sage gap-3 p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md text-darkbrown">
         <div>
           <h1 className="text-xl text-center font-bold text-darkbrown">
             Login

@@ -2,9 +2,9 @@
 import logo from "./logo-nobg.png";
 import Menuitems from "./Components/Menuitems";
 import { Link } from "react-router-dom";
-import { IoMdCart } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import LoginSignup from "./Components/LoginSignup";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,34 +23,7 @@ export default function Navbar() {
       </div>
 
       <div className="hidden lg:inline-block">
-        <ul className="flex gap-5 items-center h-full text-[var(--darkbrown)]">
-          <li>
-            <div className="dropdown dropdown-start">
-              <div tabIndex={0} role="button" className="btn m-1">
-                Login/Signup
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-              >
-                <li>
-                  <a>As a User</a>
-                </li>
-                <li>
-                  <a>As a Seller</a>
-                </li>
-                <li>
-                  <a>As a Admin</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <Link to="/cart">
-              <IoMdCart className="size-8 text-[var(--sage)]" />
-            </Link>
-          </li>
-        </ul>
+        <LoginSignup />
       </div>
 
       <GiHamburgerMenu
@@ -59,36 +32,13 @@ export default function Navbar() {
       />
 
       {isOpen && (
-        <div className="absolute h-screen bg-[var(--lightsage)] right-0 flex flex-col p-15 text-lg justify-around">
+        <div className="absolute h-screen bg-[var(--cream)] right-0 top-0 flex flex-col p-15 text-lg justify-around">
           <div className="h-max">
             <Menuitems />
           </div>
 
-          <div className="flex flex-col gap-5 items-center h-max">
-            <div className="dropdown dropdown-start">
-              <div tabIndex={0} role="button" className="btn m-1">
-                Login/Signup
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-              >
-                <li>
-                  <a>As a User</a>
-                </li>
-                <li>
-                  <a>As a Seller</a>
-                </li>
-                <li>
-                  <a>As a Admin</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <Link to="/cart">
-                <IoMdCart className="size-8 text-[var(--sage)]" />
-              </Link>
-            </div>
+          <div>
+            <LoginSignup />
           </div>
         </div>
       )}

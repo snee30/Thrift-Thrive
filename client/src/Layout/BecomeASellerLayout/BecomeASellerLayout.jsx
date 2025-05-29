@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const BecomeASellerLayout = () => {
   const [activeTab, setActiveTab] = useState("guidelines"); // State to manage active tab
@@ -138,7 +138,7 @@ const BecomeASellerLayout = () => {
           )}
 
           {activeTab === "sellerForm" && (
-            <div>
+            <div className="text-darkbrown">
               <h2 className="text-2xl font-bold text-darkbrown mb-4">
                 Seller Form
               </h2>
