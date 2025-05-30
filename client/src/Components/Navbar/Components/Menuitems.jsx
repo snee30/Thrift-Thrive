@@ -1,7 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import { items } from "./items";
+import { authState } from "../../../GlobalState/authState";
 
 export default function Menuitems() {
+  const { role } = authState();
   return (
     <ul className=" flex flex-col lg:flex-row justify-center h-full gap-15 items-center">
       {/* Listing items of data */}
@@ -14,10 +16,10 @@ export default function Menuitems() {
         </li>
       ))}
       <Link
-        to="/sell"
+        to={role === "seller" ? "/sell" : "/signup/seller"}
         className="bg-[var(--sage)] py-2 px-4 rounded-lg text-[var(--darkbrown)]"
       >
-        Become a Seller
+        {role === "seller" ? "Add a Product" : "Become a Seller"}
       </Link>
     </ul>
   );

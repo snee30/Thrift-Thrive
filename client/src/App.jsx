@@ -5,16 +5,18 @@ import BecomeASellerLayout from "./Layout/BecomeASellerLayout";
 import ProductLayout from "./Layout/ProductLayout";
 import LoginLayout from "./Layout/LoginLayout";
 import Navbar from "./Components/Navbar";
-import SigninLayout from "./Layout/SigninLayout";
+import SignupLayout from "./Layout/SignupLayout";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
 
 export default function App() {
   const { checkAuth } = authState();
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
   return (
     <Router>
       <Toaster />
@@ -24,8 +26,8 @@ export default function App() {
         <Route path="/about" element={<AboutLayout />} />
         <Route path="/sell" element={<BecomeASellerLayout />} />
         <Route path="/products" element={<ProductLayout />} />
-        <Route path="/login" element={<LoginLayout />} />
-        <Route path="/signin" element={<SigninLayout />} />
+        <Route path="/login/:role" element={<LoginLayout />} />
+        <Route path="/signup/:role" element={<SignupLayout />} />
       </Routes>
     </Router>
   );

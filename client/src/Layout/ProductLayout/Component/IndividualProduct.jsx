@@ -1,13 +1,14 @@
 import React from "react";
 
-const IndividualProduct = (details) => {
+const IndividualProduct = ({ details }) => {
+  console.log(details); // Log the details to verify the data structure
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
       {/* Product Image */}
       <img
-        src={details.productImage} // Use the imageUrl from productsdata
+        src={"/product-images/nails.png"} // Use the imageUrl from productsdata
         alt="image"
-        className="w-full h-100 object-fit"
+        className="w-full h-60 object-contain"
       />
 
       {/* Product Details */}

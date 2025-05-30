@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useParams } from "react-router-dom"; // Import Link for navigation
 import { authState } from "../../GlobalState/authState";
 
 const SignInLayout = () => {
@@ -8,10 +8,12 @@ const SignInLayout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
   const [error, setError] = useState("");
 
   const { signup } = authState();
 
+  const { role } = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -25,12 +27,16 @@ const SignInLayout = () => {
     setError("");
 
     // Log form data
-    signup({
-      name: fullName,
-      email: email,
-      password: password,
-      phone: phoneNumber,
-    });
+    signup(
+      {
+        name: fullName,
+        email: email,
+        password: password,
+        phone: phoneNumber,
+        address: address,
+      },
+      role
+    );
   };
 
   return (
@@ -38,7 +44,7 @@ const SignInLayout = () => {
       <div className="bg-sage gap-3 p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md">
         <div>
           <h1 className="text-xl text-center font-bold text-darkbrown">
-            Sign Up
+            Sign Up as a <span className="capitalize">{role}</span>
           </h1>
         </div>
         <div>
@@ -134,6 +140,23 @@ const SignInLayout = () => {
             />
           </div>
 
+          {/* Address */}
+          <div className="flex flex-col">
+            <label htmlFor="address" className="ml-1 text-darkbrown">
+              Address
+            </label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="bg-white p-2 rounded-lg placeholder:text-base"
+              required
+            />
+          </div>
+
           {/* Error Message */}
           {error && (
             <p className="text-red-500 text-sm text-center mt-2">{error}</p>
@@ -150,7 +173,10 @@ const SignInLayout = () => {
         {/* Add a link to the login page */}
         <p className="mt-4 text-sm text-darkbrown">
           Already have an account?{" "}
-          <Link to="/login" className="text-forestgreen hover:underline">
+          <Link
+            to={`/login/${role}`}
+            className="text-forestgreen hover:underline"
+          >
             Login
           </Link>
         </p>

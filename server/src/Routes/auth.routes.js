@@ -8,6 +8,7 @@ import {
   buyerLogin,
   buyerSignup,
   checkAuth,
+  logout,
   sellerLogin,
   sellerSignup,
 } from "../Controller/auth.controller.js";
@@ -20,9 +21,11 @@ router.post("/buyer/login", buyerLogin);
 router.post("/seller/signup", sellerSignup);
 router.post("/seller/login", sellerLogin);
 
-router.post("/admin/register", adminRegister);
+router.post("/admin/signup", adminRegister);
 router.post("/admin/login", adminLogin);
 
 router.get("/me", isAuth, checkAuth);
+
+router.post("/logout", logout);
 
 export default router;

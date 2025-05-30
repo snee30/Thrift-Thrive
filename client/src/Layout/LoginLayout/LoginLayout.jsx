@@ -1,19 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useParams } from "react-router-dom"; // Import Link for navigation
 import { authState } from "../../GlobalState/authState";
 
 const LoginLayout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { role } = useParams();
 
   const { login } = authState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({
-      email: email,
-      password: password,
-    });
+    login(
+      {
+        email: email,
+        password: password,
+      },
+      role
+    );
   };
 
   return (
@@ -21,7 +25,7 @@ const LoginLayout = () => {
       <div className="bg-sage gap-3 p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center w-full max-w-md text-darkbrown">
         <div>
           <h1 className="text-xl text-center font-bold text-darkbrown">
-            Login
+            Login as a <span className="capitalize">{role}</span>
           </h1>
         </div>
         <div>
@@ -67,12 +71,17 @@ const LoginLayout = () => {
           />
         </form>
 
-        <p className="mt-4 text-sm text-darkbrown">
-          Do not have an account?{" "}
-          <Link to="/signin" className="text-forestgreen hover:underline">
-            Sign in
-          </Link>
-        </p>
+        {role !== "admin" && (
+          <p className="mt-4 text-sm text-darkbrown">
+            Do not have an account?{" "}
+            <Link
+              to={`/signup/${role}`}
+              className="text-forestgreen hover:underline"
+            >
+              Sign Up As a <span className="capitalize">{role}</span>
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );

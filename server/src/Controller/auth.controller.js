@@ -472,3 +472,19 @@ export async function checkAuth(req, res) {
     });
   }
 }
+
+export async function logout(req, res) {
+  try {
+    res.clearCookie("jwt");
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    console.error("Error during logout:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+}

@@ -8,6 +8,7 @@ const ProductLayout = () => {
 
   useEffect(() => {
     getProducts();
+    console.log(products); // Log the products to verify they are fetched
   }, [getProducts]);
 
   return (
