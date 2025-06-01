@@ -3,17 +3,29 @@ import logo from "./logo-nobg.png";
 import Menuitems from "./Components/Menuitems";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginSignup from "./Components/LoginSignup";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    // Run once on mount in case user loads on large screen
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   function handleClick() {
     setIsOpen((prev) => !prev);
   }
   return (
-    <div className="w-full flex px-4 justify-between items-center bg-[#fdf8e1] text-sm md:text-lg fixed">
+    <div className="w-full flex px-4 justify-between items-center bg-[#fdf8e1] text-sm md:text-lg fixed z-100">
       <Link to="/">
         <img src={logo} alt="logo" className="size-28 rounded-full" />
       </Link>

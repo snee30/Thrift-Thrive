@@ -1,18 +1,35 @@
-import Product from "../Models/porductModel.js";
+import { uploadImage } from "../lib/cloudinary.js";
+import Product from "../Models/productModel.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const { name, category, price, condition, negotiable, productImage } =
-      req.body;
+    const {
+      name,
+      category,
+      price,
+      description,
+      condition,
+      negotiable,
+      productImages,
+    } = req.body;
 
     // Validate required fields
-    if (!name || !category || !price || !condition || !productImage) {
+    if (
+      !name ||
+      !category ||
+      !price ||
+      !condition ||
+      !productImages ||
+      !description
+    ) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
-
+    const uploadedImages = await Promise.all(
+      productImages.map(async (img) => await uploadImage(img))
+    );
     // Create new product
     const newProduct = {
       seller: req.seller._id,
@@ -20,8 +37,10 @@ export const addProduct = async (req, res) => {
       category,
       price,
       condition,
+      description,
       negotiable,
-      productImage,
+      productImages: uploadedImages,
+      approved: true,
     };
 
     // Save product to database

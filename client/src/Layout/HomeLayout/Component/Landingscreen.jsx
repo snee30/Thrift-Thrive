@@ -6,7 +6,7 @@ const Landingscreen = () => {
   return (
     <section className="main-home flex justify-around items-center">
       <div className="main-text p-20">
-        <h3>
+        <h3 className="font-second text-3xl">
           Support Sutainable Fashion<i className="bx bx-recycle"></i>
         </h3>
         <h2>most items under Rs.999/-</h2>

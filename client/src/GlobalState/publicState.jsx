@@ -8,7 +8,7 @@ const usePublicState = create((set) => ({
   getProducts: async () => {
     try {
       const response = await axiosInstance.get("/public/all-products");
-      console.log(response.data.products);
+
       set({ products: response.data.products });
     } catch (error) {
       console.error("Failed to fetch products:", error);

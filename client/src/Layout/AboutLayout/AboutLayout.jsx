@@ -25,9 +25,9 @@ const AboutLayout = () => {
             <div className="w-full h-60 rounded-lg flex items-center justify-center">
               {/* Replace the src with your image path */}
               <img
-                src="/other-images/kti.png" // Add your image path here
+                src="/other-images/kti.png"
                 alt="Who Are We"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
           </div>
@@ -45,12 +45,12 @@ const AboutLayout = () => {
               money.
             </p>
             {/* Space for Image */}
-            <div className="w-full h-70 rounded-lg flex items-center justify-center">
+            <div className="w-full h-60 rounded-lg flex items-center justify-center">
               {/* Replace the src with your image path */}
               <img
-                src="/other-images/ktakti.png" // Add your image path here
+                src="/other-images/ktakti.png"
                 alt="What Do We Do"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
           </div>
@@ -70,9 +70,9 @@ const AboutLayout = () => {
             <div className="w-full h-60 rounded-lg flex items-center justify-center">
               {/* Replace the src with your image path */}
               <img
-                src="/other-images/sweats.png" // Add your image path here
+                src="/other-images/sweats.png"
                 alt="Goals and Missions"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
           </div>

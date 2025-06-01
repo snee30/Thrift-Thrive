@@ -26,7 +26,12 @@ const productSchema = new mongoose.Schema(
       ],
       required: true,
     },
-
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 500,
+    },
     price: {
       type: Number,
       required: true,
@@ -44,8 +49,19 @@ const productSchema = new mongoose.Schema(
       default: false,
     },
 
-    productImage: {
-      type: [String],
+    productImages: {
+      type: [
+        {
+          url: {
+            type: String,
+            required: true,
+          },
+          publicId: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
       required: true,
     },
 

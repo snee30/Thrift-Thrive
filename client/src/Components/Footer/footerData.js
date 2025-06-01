@@ -1,7 +1,7 @@
 const footerData = [
   {
     name: "Privacy Policy",
-    path: "privacypolicy",
+    path: "/privacypolicy",
   },
   {
     name: "FAQs",

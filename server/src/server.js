@@ -11,7 +11,11 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./lib/db.js";
 dotenv.config();
 const app = express();
-app.use(express.json());
+app.use(
+  express.json({
+    limit: "100mb",
+  })
+);
 
 app.use(cookieParser()); // Add this line
 

@@ -10,12 +10,11 @@ const LoginSignup = () => {
       {user ? (
         <div>
           <div className="dropdown dropdown-start">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn text-brown m-1 bg-sage border-0 p-2 rounded-lg"
-            >
-              {user.name}
+            <div tabIndex={0} role="button" className="m-1 ">
+              <img
+                src="/other-images/default-profile.jpg"
+                className="size-13 rounded-full"
+              />
             </div>
             <ul
               tabIndex={0}

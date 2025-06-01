@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Sacramento&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 
 @theme {
+  --font-second: "Cookie", cursive;
   --color-cream: #fdf8e1;
   --color-sage: #b6c7aa;
   --color-brown: #74512d;
@@ -25,12 +27,15 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: "Times New Roman", Times, serif;
 }
 
 body {
   min-width: 400px;
+
+  font-family: "Winky Rough", cursive;
+  font-size: 1.15rem;
 }
+
 img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
