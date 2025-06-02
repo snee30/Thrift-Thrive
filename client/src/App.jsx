@@ -14,6 +14,7 @@ import SignupLayout from "./Layout/SignupLayout";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
+import IndividualProductLayout from "./Layout/IndividualProductLayout";
 
 export default function App() {
   const { checkAuth, role } = authState();
@@ -27,12 +28,22 @@ export default function App() {
       <Toaster />
       <Navbar />
       <Routes>
+        {/* Navbar Links */}
         <Route path="/" element={<HomeLayout />} />
         <Route path="/about" element={<AboutLayout />} />
         <Route path="/products" element={<ProductLayout />} />
-        <Route path="/login/:role" element={<LoginLayout />} />
-        <Route path="/signup/:role" element={<SignupLayout />} />
 
+        {/* Auth Routing */}
+        <Route
+          path="/login/:role"
+          element={!role ? <LoginLayout /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/signup/:role"
+          element={!role ? <SignupLayout /> : <Navigate to={"/"} />}
+        />
+
+        {/* Seller Routing */}
         <Route
           path="/sell"
           element={
@@ -44,6 +55,14 @@ export default function App() {
           }
         />
 
+        {/* Products Routing */}
+        {/* Individual Product */}
+        <Route
+          path="/product/:productId"
+          element={<IndividualProductLayout />}
+        />
+
+        {/* Not Found Page */}
         <Route
           path="*"
           element={

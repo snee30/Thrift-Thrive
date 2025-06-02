@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import sellerState from "../../GlobalState/sellerState";
 
 const SellerForm = () => {
@@ -90,8 +90,11 @@ const SellerForm = () => {
   };
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-brown"></div>
+      <div className="flex items-center justify-center h-100">
+        <div className="bg-white p-10 rounded-md shadow-xl flex flex-col items-center gap-2 backdrop-blur-2xl">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-brown"></div>
+          <p>Adding Your Product</p>
+        </div>
       </div>
     );
   }
@@ -233,7 +236,7 @@ const SellerForm = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="mt-5 bg-brown text-cream p-3 px-8 rounded-lg hover:bg-darkbrown self-center"
+          className="mt-5 bg-brown text-cream p-3 px-8 rounded-lg hover:bg-darkbrown self-center cursor-pointer"
         >
           Display Product
         </button>

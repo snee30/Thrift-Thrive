@@ -1,14 +1,12 @@
 import IndividualProduct from "./Component/IndividualProduct";
 import { useEffect } from "react";
 import usePublicState from "../../GlobalState/publicState";
-// import productsdata from "./productsdata"; // Import the products data
 
 const ProductLayout = () => {
   const { products, getProducts } = usePublicState();
 
   useEffect(() => {
     getProducts();
-    console.log(products); // Log the products to verify they are fetched
   }, [getProducts]);
 
   return (

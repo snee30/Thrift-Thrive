@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const IndividualProduct = ({ details }) => {
   const images =
@@ -9,7 +9,10 @@ const IndividualProduct = ({ details }) => {
   const uniqueId = details._id;
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+    <Link
+      to={`/product/${details._id}`}
+      className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
+    >
       {/* DaisyUI Carousel */}
       <div className="carousel w-full h-60 relative">
         {images.map((image, index) => (
@@ -24,7 +27,12 @@ const IndividualProduct = ({ details }) => {
               className="w-full h-60 object-contain"
             />
             {images.length > 1 && (
-              <div className="absolute left-5 right-5 top-1/2 flex justify-between transform -translate-y-1/2">
+              <div
+                className="absolute left-5 right-5 top-1/2 flex justify-between transform -translate-y-1/2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 <a
                   href={`#slide-${uniqueId}-${
                     (index - 1 + images.length) % images.length
@@ -59,7 +67,7 @@ const IndividualProduct = ({ details }) => {
           Negotiable: {details.negotiable ? "Yes" : "No"}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
