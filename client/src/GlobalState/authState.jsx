@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axiosInstance";
+import useCartStore from "./useCartStore";
 
 export const authState = create((set) => ({
   user: null,
@@ -74,6 +75,7 @@ export const authState = create((set) => ({
     try {
       await axiosInstance.post("/auth/logout");
       set({ user: null, role: "" });
+      useCartStore.getState().clearCart();
       toast.success("Logout Successful");
     } catch (error) {
       toast.error(error.response.data.message || "Server Error!!!");

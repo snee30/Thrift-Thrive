@@ -31,7 +31,7 @@ const BecomeASellerLayout = () => {
                 : "bg-sage text-darkbrown hover:bg-darkbrown hover:text-cream"
             } transition-colors duration-300`}
           >
-            Seller Form
+            Add a Product
           </button>
         </div>
         {/* Content Section */}

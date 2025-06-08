@@ -7,6 +7,7 @@ import sellerRoutes from "./Routes/seller.route.js";
 import publicRoutes from "./Routes/public.routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import cartRoutes from "./Routes/cart.routes.js";
 
 import { connectDB } from "./lib/db.js";
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/seller", sellerRoutes);
 app.use("/api/public", publicRoutes);
+app.use("/api/cart", cartRoutes);
 // app.use("/auth/buyer", buyerAuthRoutes);
 
 const PORT = process.env.PORT;

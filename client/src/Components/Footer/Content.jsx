@@ -33,10 +33,33 @@ const Content = () => {
           <h4 className="text-lg font-bold text-[var(--darkbrown)]">
             Connect with us
           </h4>
-          <div className="icon flex mt-2 gap-4 ">
-            <FaInstagram size={30} />
-            <AiFillTikTok size={30} />
-            <FaFacebookSquare size={30} />
+          <div className="icon flex mt-2 gap-4">
+            <a
+              href="https://www.instagram.com/thrift.and._.thrive?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram
+                size={30}
+                className="hover:text-forestgreen transition-colors duration-200 text-darkbrown"
+              />
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@your_username"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <AiFillTikTok
+                size={30}
+                className="hover:text-forestgreen transition-colors duration-200 text-darkbrown"
+              />
+            </a>
+
+            <FaFacebookSquare
+              size={30}
+              className="hover:text-forestgreen transition-colors duration-200 text-darkbrown"
+            />
           </div>
         </div>
         <div>
@@ -46,7 +69,7 @@ const Content = () => {
               <Link
                 key={index}
                 to={link.path}
-                className="text-[#835151] hover:text-[#79c19f]"
+                className="hover:text-forestgreen transition-colors duration-200 text-darkbrown"
               >
                 {link.name}
               </Link>

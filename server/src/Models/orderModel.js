@@ -13,7 +13,10 @@ const orderSchema = new mongoose.Schema(
       ref: "Buyer",
       required: true,
     },
-
+    price: {
+      type: Number,
+      required: true,
+    },
     delivery_status: {
       type: String,
       enum: ["pending", "shipped", "delivered", "cancelled"],

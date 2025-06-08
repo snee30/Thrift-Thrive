@@ -14,7 +14,7 @@ import SignupLayout from "./Layout/SignupLayout";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
-import IndividualProductLayout from "./Layout/IndividualProductLayout";
+import IndividualProductClick from "./Layout/IndividualProductClick";
 
 export default function App() {
   const { checkAuth, role } = authState();
@@ -59,7 +59,7 @@ export default function App() {
         {/* Individual Product */}
         <Route
           path="/product/:productId"
-          element={<IndividualProductLayout />}
+          element={<IndividualProductClick />}
         />
 
         {/* Not Found Page */}

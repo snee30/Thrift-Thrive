@@ -90,14 +90,17 @@ const SellerForm = () => {
   };
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-100">
-        <div className="bg-white p-10 rounded-md shadow-xl flex flex-col items-center gap-2 backdrop-blur-2xl">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-brown"></div>
-          <p>Adding Your Product</p>
+      <div className="flex h-50 items-center justify-center bg-transparent z-50 pointer-events-none">
+        <div className="bg-white  bg-opacity-90 rounded-xl shadow-lg p-8 flex flex-col items-center gap-4 max-w-xs w-full mx-4">
+          <div className="w-16 h-16 border-4 border-green-400 border-t-green-600 rounded-full animate-spin"></div>
+          <p className="text-green-700 font-semibold text-lg select-none">
+            Adding Your Product...
+          </p>
         </div>
       </div>
     );
   }
+
   return (
     <div className="text-darkbrown">
       <h2 className="text-2xl font-bold mb-4">Add New Product</h2>

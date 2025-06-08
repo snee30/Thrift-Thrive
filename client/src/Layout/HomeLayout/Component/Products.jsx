@@ -14,14 +14,12 @@ const Products = () => {
       {/* Products Grid - Left Aligned */}
       <div className="flex gap-5 flex-wrap justify-start">
         {featuredProductData.map((product, index) => (
-          <>
-            <IndividualFeatureProduct
-              key={index}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-            />
-          </>
+          <IndividualFeatureProduct
+            key={index}
+            image={product.image}
+            name={product.name}
+            price={product.price}
+          />
         ))}
       </div>
     </div>

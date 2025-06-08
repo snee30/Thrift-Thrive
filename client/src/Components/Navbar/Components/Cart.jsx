@@ -1,4 +1,16 @@
+import { useEffect } from "react";
+import useCartStore from "../../../GlobalState/useCartStore";
+import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+
 const Cart = () => {
+  const { cartItems, fetchCart, removeFromCart } = useCartStore();
+
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
+
+  const subtotal = cartItems.reduce((acc, item) => acc + (item.price || 0), 0);
+
   return (
     <div>
       <div className="flex-none">
@@ -6,54 +18,75 @@ const Cart = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle bg-sage hover:text-brown p-3"
+            className="btn btn-ghost btn-circle hover:text-brown p-3 hover:scale-105 transition-transform duration-200"
           >
             <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />{" "}
-              </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <FaShoppingCart className="text-3xl text-darkbrown" />
+              <span className="badge badge-sm indicator-item bg-brown text-white">
+                {cartItems?.length || 0}
+              </span>
             </div>
           </div>
+
           <div
             tabIndex={0}
-            className="card card-compact dropdown-content bg-sage p-0 z-1 w-70 shadow border-1"
+            className="card card-compact dropdown-content bg-[#fdf8f3] p-0 z-1 w-70 shadow border-1 h-70 overflow-auto rounded-xl"
           >
-            <div className="card-body">
-              <div className="flex gap-2 p-2 border-b-2">
-                <img
-                  src="/other-images/jeans.png"
-                  alt=""
-                  className="size-10 rounded-full object-contain"
-                />
-                <div>
-                  <h1>Product Name 1</h1>
-                  <p>Price: $999</p>
+            {cartItems.length === 0 ? (
+              <div className="card-body">
+                <h2 className="text-center text-lg font-semibold">
+                  Your cart is empty
+                </h2>
+              </div>
+            ) : (
+              <>
+                <div className="max-h-56 overflow-y-auto px-2 py-1">
+                  {cartItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex gap-2 p-2 items-center justify-between ${
+                        index !== cartItems.length - 1 ? "border-b" : ""
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="w-12 h-12 rounded-full object-contain"
+                        />
+                        <div>
+                          <h1 className="text-base font-medium">{item.name}</h1>
+                          <p className="text-sm">Price: Rs. {item.price}</p>
+                        </div>
+                      </div>
+                      <button
+                        className="btn btn-xs btn-circle bg-brown hover:bg-darkbrown text-white"
+                        onClick={() => removeFromCart(item._id)}
+                        title="Remove item"
+                      >
+                        <FaTrashAlt size={14} />
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              </div>
-              <span className="text-darkbrown">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn bg-darkbrown btn-block">
-                  View cart
-                </button>
-              </div>
-            </div>
+
+                <div className="px-4 pt-3 border-t bg-[#fdf8f3] rounded-b-xl">
+                  <div className="text-darkbrown font-semibold text-lg mb-2">
+                    Subtotal: Rs. {subtotal}
+                  </div>
+                  <div className="card-actions">
+                    <button className="btn bg-darkbrown text-white btn-block">
+                      Proceed to Checkout
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Cart;
