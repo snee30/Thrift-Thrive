@@ -40,7 +40,6 @@ export const addProduct = async (req, res) => {
       description,
       negotiable,
       productImages: uploadedImages,
-      approved: true,
     };
 
     // Save product to database

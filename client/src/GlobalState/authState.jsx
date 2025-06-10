@@ -6,9 +6,12 @@ import useCartStore from "./useCartStore";
 export const authState = create((set) => ({
   user: null,
   role: "",
+  loading: false,
+  checkAuthLoading: true,
 
   signup: async (data, role) => {
     try {
+      set({ loading: true });
       const response = await axiosInstance.post(`/auth/${role}/signup`, data);
       set({
         user:
@@ -24,11 +27,14 @@ export const authState = create((set) => ({
     } catch (error) {
       toast.error(error.response.data.message || "Server Error!!!");
       console.log(error.response.data);
+    } finally {
+      set({ loading: false });
     }
   },
 
   login: async (data, role) => {
     try {
+      set({ loading: true });
       const response = await axiosInstance.post(`/auth/${role}/login`, data);
       set({
         user:
@@ -39,16 +45,17 @@ export const authState = create((set) => ({
             : response.data.admin,
         role: role,
       });
-      console.log(response.data);
       toast.success("Login Successful");
     } catch (error) {
       toast.error(error.response.data.message || "Server Error!!!");
       console.log(error.response.data);
     }
+    set({ loading: false });
   },
 
   checkAuth: async () => {
     try {
+      set({ checkAuthLoading: true });
       const res = await axiosInstance.get("/auth/me");
 
       if (res.data.buyer) {
@@ -68,6 +75,8 @@ export const authState = create((set) => ({
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      set({ checkAuthLoading: false });
     }
   },
 

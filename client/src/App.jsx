@@ -15,13 +15,18 @@ import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
 import IndividualProductClick from "./Layout/IndividualProductClick";
+import UnapprovedProducts from "./Layout/UnapprovedProducts/UnapprovedProducts";
 
 export default function App() {
-  const { checkAuth, role } = authState();
+  const { checkAuth, role, checkAuthLoading } = authState();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  if (checkAuthLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
@@ -60,6 +65,18 @@ export default function App() {
         <Route
           path="/product/:productId"
           element={<IndividualProductClick />}
+        />
+
+        {/* Admin Route */}
+        <Route
+          path="/admin/products/unapproved"
+          element={
+            !role || role === "seller" || role === "buyer" ? (
+              <Navigate to="/" />
+            ) : (
+              <UnapprovedProducts />
+            )
+          }
         />
 
         {/* Not Found Page */}
