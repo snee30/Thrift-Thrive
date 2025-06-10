@@ -15,7 +15,7 @@ import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
 import IndividualProductClick from "./Layout/IndividualProductClick";
-import UnapprovedProducts from "./Layout/UnapprovedProducts/UnapprovedProducts";
+import AdminDashboard from "./Layout/AdminDashboardLayout/AdminDashboard";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -69,12 +69,12 @@ export default function App() {
 
         {/* Admin Route */}
         <Route
-          path="/admin/products/unapproved"
+          path="/admin/dashboard"
           element={
             !role || role === "seller" || role === "buyer" ? (
               <Navigate to="/" />
             ) : (
-              <UnapprovedProducts />
+              <AdminDashboard />
             )
           }
         />

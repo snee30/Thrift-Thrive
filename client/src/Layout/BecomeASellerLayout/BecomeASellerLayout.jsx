@@ -44,7 +44,7 @@ const BecomeASellerLayout = () => {
                   Guidelines for Selling
                 </h2>
                 <p className="text-darkbrown">
-                  Selling at Thrift & Thrive is easy and convenient. Simply
+                  Selling at Thrift & Thrive is easy and convenient.Simply
                   follow these steps:
                 </p>
                 <ul className="list-disc list-inside mt-4 text-darkbrown">
@@ -57,7 +57,7 @@ const BecomeASellerLayout = () => {
                   </li>
                 </ul>
                 <p className="mt-4 text-darkbrown">
-                  Join 5000+ sellers who choose Thrift & Thrive to de-clutter
+                  Join the sellers who choose Thrift & Thrive to de-clutter
                   their closets and homes.
                 </p>
 
@@ -96,10 +96,13 @@ const BecomeASellerLayout = () => {
               Here are the details about our commission and fees:
             </p>
             <ul className="list-disc list-inside mt-4 text-darkbrown">
-              <li>We charge a 10% commission on every sale.</li>
+              <li>We charge a 20% commission on every sale.</li>
               <li>There are no upfront fees for listing your products.</li>
               <li>Shipping costs are covered by the buyer.</li>
-              <li>Payments are processed securely and paid out weekly.</li>
+              <li>
+                Payments are processed securely and paid out after your items
+                get sold.
+              </li>
             </ul>
             <button
               onClick={() => setShowCommissionModal(false)}

@@ -15,11 +15,11 @@ export const addToCart = async (req, res) => {
         await cart.save();
         return res
           .status(200)
-          .json({ success: true, message: "Added to cart", cart });
+          .json({ success: true, message: "Added to cart" });
       } else {
         return res
-          .status(200)
-          .json({ success: false, message: "Item already in cart", cart });
+          .status(400)
+          .json({ success: false, message: "Item already in cart" });
       }
     } else {
       // No cart exists yet, create one

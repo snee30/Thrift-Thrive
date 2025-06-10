@@ -92,7 +92,7 @@ const AboutLayout = () => {
             Meet the Owner
           </h2>
           <img
-            src="/other-images/owner.jpg" // Add your actual image path here
+            src="/public/sne.jpg" // Add your actual image path here
             alt="Owner"
             className="w-60 h-60 rounded-full object-cover shadow-lg"
           />

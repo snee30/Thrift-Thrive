@@ -10,11 +10,18 @@ const LoginSignup = () => {
       {user ? (
         <div>
           <div className="dropdown dropdown-start">
-            <div tabIndex={0} role="button" className="m-1 ">
+            <div
+              tabIndex={0}
+              role="button"
+              className="m-1 flex flex-col items-center justify-center"
+            >
               <img
                 src="/other-images/default-profile.jpg"
                 className="size-13 rounded-full"
               />
+              <p className="text-sm">
+                {user.name.split(" ")[0]} [{role}]
+              </p>
             </div>
             <ul
               tabIndex={0}

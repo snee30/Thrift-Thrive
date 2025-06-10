@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 
 const useCartStore = create((set, get) => ({
   cartItems: [],
+  loading: false,
 
   // Fetch cart items from backend (optional)
   fetchCart: async () => {
@@ -19,6 +20,7 @@ const useCartStore = create((set, get) => ({
 
   addToCart: async (product) => {
     try {
+      set({ loading: true });
       const res = await axiosInstance.post(`/cart/add/${product._id}`);
 
       if (res.data.success) {
@@ -35,12 +37,14 @@ const useCartStore = create((set, get) => ({
         }));
 
         toast.success("Added to cart successfully!");
-      } else {
-        toast.error("Failed to add to cart");
       }
     } catch (error) {
       console.error("Add to cart error:", error);
-      toast.error("An error occurred while adding to cart");
+      toast.error(
+        error.response.data.message || "An error occurred while adding to cart"
+      );
+    } finally {
+      set({ loading: false });
     }
   },
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const IndividualProduct = ({ details }) => {
+const IndividualProduct = ({ details, role = "" }) => {
   const images =
     Array.isArray(details.productImages) && details.productImages.length > 0
       ? details.productImages
@@ -10,7 +10,11 @@ const IndividualProduct = ({ details }) => {
 
   return (
     <Link
-      to={`/product/${details._id}`}
+      to={
+        role === "admin"
+          ? `admin/product/${details._id}`
+          : `/product/${details._id}`
+      }
       className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
     >
       {/* DaisyUI Carousel */}

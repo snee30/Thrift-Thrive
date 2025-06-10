@@ -8,6 +8,7 @@ import { isBuyer } from "../Middleware/auth.middle.js";
 
 const router = express.Router();
 router.use(isBuyer);
+
 router.post("/add/:productId", addToCart);
 router.get("/cart-items", viewCart);
 router.delete("/remove/:productId", removeFromCart);

@@ -2,18 +2,25 @@ import { useParams } from "react-router-dom";
 import usePublicState from "../../GlobalState/publicState";
 import useCartStore from "../../GlobalState/useCartStore"; // import your zustand store
 import { useEffect } from "react";
+import { authState } from "../../GlobalState/authState";
+import toast from "react-hot-toast";
 
 const IndividualProductClick = () => {
   const { productId } = useParams();
   const { getIndividualProduct, individualProduct } = usePublicState();
-  const { addToCart } = useCartStore();
+  const { addToCart, loading } = useCartStore();
+  const { role } = authState();
 
   useEffect(() => {
     getIndividualProduct(productId);
   }, [productId]);
 
   const handleAddToCart = () => {
-    addToCart(individualProduct);
+    if (role === "buyer") {
+      addToCart(individualProduct);
+    } else {
+      toast.error("You need to sign in as a buyer to add product to the cart");
+    }
   };
 
   return (
@@ -92,9 +99,13 @@ const IndividualProductClick = () => {
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="btn mt-6 w-fit bg-darksage border-0 shadow-none text-white"
+              className={`btn mt-6 w-fit bg-darksage border-0 shadow-none text-white ${
+                loading
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-darksage cursor-pointer"
+              }`}
             >
-              Add to Cart
+              {loading ? "Adding to Cart..." : "Add to Cart"}
             </button>
           </div>
         </div>
