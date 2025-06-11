@@ -52,7 +52,7 @@ const Content = () => {
               What payment methods do you accept?
             </h3>
             <p>
-              We accept Cash on hand as well as Bank transfer for both inside
+              We accept cash on hand as well as online payment for both inside
               and outside Kathmandu valley.
             </p>
           </div>

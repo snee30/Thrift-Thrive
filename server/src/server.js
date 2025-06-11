@@ -33,6 +33,7 @@ app.use("/api/seller", sellerRoutes);
 app.use("/api/public", publicRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/admin", adminRoutes);
+
 // app.use("/auth/buyer", buyerAuthRoutes);
 
 const PORT = process.env.PORT;
