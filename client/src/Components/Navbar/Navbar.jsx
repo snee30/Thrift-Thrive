@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import LoginSignup from "./Components/LoginSignup";
+import { authState } from "../../GlobalState/authState";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { role } = authState();
 
   useEffect(() => {
     function handleResize() {
@@ -26,7 +28,7 @@ export default function Navbar() {
   }
   return (
     <div className="w-full flex px-4 justify-between items-center bg-[#fdf8e1] text-sm md:text-lg fixed z-100">
-      <Link to="/">
+      <Link to={role === "admin" ? "/admin/dashboard" : "/"}>
         <img src={logo} alt="logo" className="size-28 rounded-full" />
       </Link>
 

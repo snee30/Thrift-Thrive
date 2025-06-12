@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useCartStore from "../../../GlobalState/useCartStore";
 import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, fetchCart, removeFromCart } = useCartStore();
@@ -75,9 +76,12 @@ const Cart = () => {
                     Subtotal: Rs. {subtotal}
                   </div>
                   <div className="card-actions">
-                    <button className="btn bg-darkbrown text-white btn-block">
+                    <Link
+                      to={"/checkout"}
+                      className="btn bg-darkbrown text-white btn-block"
+                    >
                       Proceed to Checkout
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </>

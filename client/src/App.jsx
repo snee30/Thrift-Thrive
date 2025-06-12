@@ -17,6 +17,8 @@ import { authState } from "./GlobalState/authState";
 import IndividualProductClick from "./Layout/IndividualProductClick";
 import AdminDashboard from "./Layout/AdminDashboardLayout/AdminDashboard";
 import AdminApproveLayout from "./Layout/AdminProductApproveLayout/AdminApproveLayout";
+import RejectedProducts from "./Layout/RejectedProductLayout/RejectedProducts";
+import Checkout from "./Layout/CheckoutLayout/Checkout";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -49,6 +51,19 @@ export default function App() {
           element={!role ? <SignupLayout /> : <Navigate to={"/"} />}
         />
 
+        {/* Buyer Routing
+         */}
+        <Route
+          path="/checkout"
+          element={
+            !role || role === "admin" || role === "seller" ? (
+              <Navigate to="/signup/buyer" />
+            ) : (
+              <Checkout />
+            )
+          }
+        />
+
         {/* Seller Routing */}
         <Route
           path="/sell"
@@ -76,6 +91,16 @@ export default function App() {
               <Navigate to="/" />
             ) : (
               <AdminDashboard />
+            )
+          }
+        />
+        <Route
+          path="/admin/rejected-products"
+          element={
+            !role || role === "seller" || role === "buyer" ? (
+              <Navigate to="/" />
+            ) : (
+              <RejectedProducts />
             )
           }
         />

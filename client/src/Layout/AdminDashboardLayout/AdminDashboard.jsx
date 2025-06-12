@@ -1,6 +1,7 @@
 import { useAdminStore } from "../../GlobalState/useAdminStore";
 import { useEffect } from "react";
 import IndividualProduct from "../ProductLayout/Component/IndividualProduct";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const {
@@ -36,6 +37,8 @@ const AdminDashboard = () => {
           ))
         )}
       </div>
+
+      <Link to={"/admin/rejected-products"}>View Rejected Products</Link>
     </div>
   );
 };

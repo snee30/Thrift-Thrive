@@ -26,7 +26,7 @@ export const getProductById = async (req, res) => {
   try {
     const product = await Product.findOne({
       _id: req.params.productId,
-      approved: true,
+      status: "approved",
     }).select(
       "name price description productImages category condition negotiable"
     );

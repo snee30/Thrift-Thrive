@@ -2,6 +2,7 @@ import { Router } from "express";
 import { isAdmin } from "../Middleware/auth.middle.js";
 import {
   getProductByIdAdmin,
+  getRejectedProducts,
   getUnapprovedProducts,
   respondProducts,
 } from "../Controller/admin.controller.js";
@@ -13,5 +14,6 @@ router.use(isAdmin);
 router.get("/products/unapproved", getUnapprovedProducts);
 router.get("/product/:productId", getProductByIdAdmin);
 router.post("/product/respond/:productId", respondProducts);
+router.get("/products/rejected", getRejectedProducts);
 
 export default router;

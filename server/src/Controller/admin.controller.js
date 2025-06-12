@@ -4,7 +4,7 @@ export async function getUnapprovedProducts(req, res) {
   try {
     const unapprovedProducts = await Product.find({
       status: "pending",
-    });
+    }).select("name price productImages category condition negotiable");
 
     res.status(200).json({
       success: true,
@@ -55,6 +55,8 @@ export async function respondProducts(req, res) {
     const { productId } = req.params;
     const { status } = req.body;
 
+    console.log(status);
+
     if (status !== "approved" && status !== "rejected") {
       return res.status(400).json({
         success: false,
@@ -87,5 +89,27 @@ export async function respondProducts(req, res) {
       success: false,
       message: "Internal server error",
     });
+  }
+}
+
+export async function getRejectedProducts(req, res) {
+  try {
+    const rejectedProducts = await Product.find({
+      status: "rejected",
+    }).select("name price productImages category condition negotiable");
+
+    res.status(200).json({
+      success: true,
+      products: rejectedProducts,
+    });
+  } catch (error) {
+    console.log("Error in admin- get rejected products: ", error);
+    return (
+      res.status(500),
+      json({
+        success: false,
+        message: "Internal server error",
+      })
+    );
   }
 }
