@@ -1,4 +1,7 @@
 import cartModel from "../Models/cartModel.js";
+import OrderItem from "../Models/orderItem.js";
+import Order from "../Models/orderModel.js";
+import Payment from "../Models/paymentModel.js";
 
 export const addToCart = async (req, res) => {
   const { productId } = req.params;
@@ -40,7 +43,13 @@ export const addToCart = async (req, res) => {
 
 export const viewCart = async (req, res) => {
   try {
-    const buyerId = req.buyer._id; // from middleware/token
+    const buyerId = req.buyer._id;
+
+    if (!req.buyer || !req.buyer._id) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Unauthorized: Buyer info missing" });
+    }
 
     const cart = await cartModel
       .findOne({ buyer: buyerId })
@@ -95,5 +104,91 @@ export const removeFromCart = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Error removing item", error });
+  }
+};
+
+export const checkoutCart = async (req, res) => {
+  try {
+    const buyerId = req.buyer._id;
+    const { delivery_location, buyer_phone, transactionId } = req.body;
+
+    if (!delivery_location || !buyer_phone || !transactionId) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide all required fields",
+      });
+    }
+
+    const cart = await cartModel.findOne({ buyer: buyerId }).populate("items");
+
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).json({ success: false, message: "Cart is empty" });
+    }
+
+    // Step 1: Get all purchased product IDs from OrderItem
+    const orderedItems = await OrderItem.find({}, "product");
+    const orderedProductIds = new Set(
+      orderedItems.map((item) => item.product.toString())
+    );
+
+    // Step 2: Check for unavailable products in the cart
+    const unavailableProducts = cart.items.filter((item) =>
+      orderedProductIds.has(item._id.toString())
+    );
+
+    if (unavailableProducts.length > 0) {
+      const names = unavailableProducts.map((item) => item.name).join(", ");
+      return res.status(400).json({
+        success: false,
+        message: `Some items are no longer available: ${names}`,
+      });
+    }
+
+    // Step 3: Create the Order
+    const order = await Order.create({
+      buyer: buyerId,
+      delivery_location,
+      buyer_phone,
+    });
+
+    // Step 4: Create OrderItems
+    await Promise.all(
+      cart.items.map((item) =>
+        OrderItem.create({
+          order: order._id,
+          product: item._id,
+          seller: item.seller,
+          price: item.price,
+        })
+      )
+    );
+
+    // Step 5: Calculate total amount and record payment
+    const totalAmount = cart.items.reduce((sum, item) => sum + item.price, 0);
+
+    await Payment.create({
+      order: order._id,
+      buyer: buyerId,
+      amount: totalAmount,
+      transactionId,
+      method: "QR",
+      paid_at: new Date(),
+    });
+
+    // Step 6: Clear the cart
+    cart.items = [];
+    await cart.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Order placed successfully",
+      orderId: order._id,
+    });
+  } catch (error) {
+    console.error("Error in checkoutCart:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };

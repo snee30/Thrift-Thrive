@@ -13,7 +13,7 @@ const IndividualProductClick = () => {
 
   useEffect(() => {
     getIndividualProduct(productId);
-  }, [productId]);
+  }, [productId, getIndividualProduct]);
 
   const handleAddToCart = () => {
     if (role === "buyer") {

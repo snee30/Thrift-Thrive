@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addToCart,
+  checkoutCart,
   removeFromCart,
   viewCart,
 } from "../Controller/cart.controller.js";
@@ -12,4 +13,6 @@ router.use(isBuyer);
 router.post("/add/:productId", addToCart);
 router.get("/cart-items", viewCart);
 router.delete("/remove/:productId", removeFromCart);
+
+router.post("/checkout", checkoutCart);
 export default router;

@@ -11,6 +11,9 @@ export const useAdminStore = create((set) => ({
   individualProduct: null,
   loadingIndividualProduct: true,
 
+  rejectedProducts: [],
+  loadingRejectedProducts: false,
+
   getUnapprovedProducts: async () => {
     try {
       set({ loadingUnapprovedProducts: true });
@@ -40,13 +43,29 @@ export const useAdminStore = create((set) => ({
   respondProduct: async (productId, status) => {
     try {
       set({ loadingResponse: true });
-      await axiosInstance.post(`/admin/product/respond/${productId}`, status);
+      const res = await axiosInstance.post(
+        `/admin/product/respond/${productId}`,
+        { status }
+      );
       toast.success(res.data.message);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message || "Something went wrong");
     } finally {
       set({ loadingResponse: false });
+    }
+  },
+
+  getRejectedProducts: async () => {
+    try {
+      set({ loadingRejectedProducts: true });
+      const res = await axiosInstance.get("/admin/products/rejected");
+
+      set({ rejectedProducts: res.data.products });
+    } catch (error) {
+      console.error("Error fetching unapproved products: ", error);
+    } finally {
+      set({ loadingRejectedProducts: false });
     }
   },
 }));

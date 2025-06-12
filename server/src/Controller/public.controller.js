@@ -1,10 +1,18 @@
 import Product from "../Models/productModel.js";
+import OrderItem from "../Models/orderItem.js";
 
-// Get all approved products
 export const getAllProducts = async (req, res) => {
   try {
+    // Step 1: Get all purchased product IDs from OrderItem
+    const orderedItems = await OrderItem.find({}, "product");
+    const orderedProductIds = orderedItems.map((item) =>
+      item.product.toString()
+    );
+
+    // Step 2: Find approved products that are NOT already ordered
     const products = await Product.find({
       status: "approved",
+      _id: { $nin: orderedProductIds },
     }).select("name price productImages category condition negotiable");
 
     res.status(200).json({

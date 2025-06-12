@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const sellerPaymentSchema = new mongoose.Schema(
   {
-    order: {
+    orderItem: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Order",
+      ref: "OrderItem",
       required: true,
     },
 
@@ -26,7 +26,6 @@ const sellerPaymentSchema = new mongoose.Schema(
 
     method: {
       type: String,
-      required: true,
     },
 
     notes: {
@@ -36,7 +35,6 @@ const sellerPaymentSchema = new mongoose.Schema(
 
     paid_at: {
       type: Date,
-      required: true,
     },
   },
   { timestamps: true }
