@@ -19,13 +19,19 @@ import AdminDashboard from "./Layout/AdminDashboardLayout/AdminDashboard";
 import AdminApproveLayout from "./Layout/AdminProductApproveLayout/AdminApproveLayout";
 import RejectedProducts from "./Layout/RejectedProductLayout/RejectedProducts";
 import Checkout from "./Layout/CheckoutLayout/Checkout";
+import useCartStore from "./GlobalState/useCartStore";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
+  const { fetchCart } = useCartStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
 
   if (checkAuthLoading) {
     return <div>Loading...</div>;

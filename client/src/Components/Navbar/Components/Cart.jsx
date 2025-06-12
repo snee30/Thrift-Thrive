@@ -1,14 +1,9 @@
-import { useEffect } from "react";
 import useCartStore from "../../../GlobalState/useCartStore";
 import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, fetchCart, removeFromCart } = useCartStore();
-
-  useEffect(() => {
-    fetchCart();
-  }, [fetchCart]);
+  const { cartItems, removeFromCart } = useCartStore();
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price || 0), 0);
 

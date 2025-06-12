@@ -16,7 +16,12 @@ const paymentSchema = new mongoose.Schema(
 
     amount: {
       type: Number,
-      default: "pending",
+      required: true,
+    },
+
+    transactionId: {
+      type: String,
+      required: true,
     },
 
     status: {

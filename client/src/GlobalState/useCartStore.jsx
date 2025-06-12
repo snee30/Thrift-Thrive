@@ -61,11 +61,17 @@ const useCartStore = create((set, get) => ({
     }
   },
 
-  clearCart: async () => {
+  checkout: async (formData) => {
     try {
-      set({ cartItems: [] });
+      const res = await axiosInstance.post("/cart/checkout", formData);
+      if (res.data.success) {
+        set({ cartItems: [] });
+        toast.success("Checkout successful!");
+        return true;
+      }
     } catch (error) {
-      console.error("Clear cart error:", error);
+      toast.error(error.response.data.message || "Checkout failed");
+      return false;
     }
   },
 }));
