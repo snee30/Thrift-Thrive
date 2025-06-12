@@ -1,5 +1,4 @@
-import React from "react";
-import { useAdminStiore } from "../../GlobalState/useAdminStore";
+import { useAdminStore } from "../../GlobalState/useAdminStore";
 import { useEffect } from "react";
 import IndividualProduct from "../ProductLayout/Component/IndividualProduct";
 
@@ -8,7 +7,7 @@ const AdminDashboard = () => {
     unapprovedProducts,
     loadingUnapprovedProducts,
     getUnapprovedProducts,
-  } = useAdminStiore();
+  } = useAdminStore();
 
   useEffect(() => {
     getUnapprovedProducts();

@@ -5,6 +5,7 @@ const usePublicState = create((set) => ({
   // Public state variables
   products: [],
   individualProduct: null,
+  loadingIndividualProduct: true,
 
   getProducts: async () => {
     try {
@@ -15,13 +16,17 @@ const usePublicState = create((set) => ({
       console.error("Failed to fetch products:", error);
     }
   },
+
   getIndividualProduct: async (productId) => {
     try {
+      set({ loadingIndividualProduct: true });
       const response = await axiosInstance.get(`/public/product/${productId}`);
 
       set({ individualProduct: response.data.product });
     } catch (error) {
       console.error("Failed to fetch individual product:", error);
+    } finally {
+      set({ loadingIndividualProduct: false });
     }
   },
 }));

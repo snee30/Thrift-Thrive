@@ -12,7 +12,7 @@ const IndividualProduct = ({ details, role = "" }) => {
     <Link
       to={
         role === "admin"
-          ? `admin/product/${details._id}`
+          ? `/admin/product/${details._id}`
           : `/product/${details._id}`
       }
       className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"

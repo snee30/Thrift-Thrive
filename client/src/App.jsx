@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { authState } from "./GlobalState/authState";
 import IndividualProductClick from "./Layout/IndividualProductClick";
 import AdminDashboard from "./Layout/AdminDashboardLayout/AdminDashboard";
+import AdminApproveLayout from "./Layout/AdminProductApproveLayout/AdminApproveLayout";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -75,6 +76,16 @@ export default function App() {
               <Navigate to="/" />
             ) : (
               <AdminDashboard />
+            )
+          }
+        />
+        <Route
+          path="/admin/product/:productId"
+          element={
+            !role || role === "seller" || role === "buyer" ? (
+              <Navigate to="/" />
+            ) : (
+              <AdminApproveLayout />
             )
           }
         />
