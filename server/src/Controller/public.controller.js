@@ -4,7 +4,7 @@ import Product from "../Models/productModel.js";
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find({
-      approved: true,
+      status: "approved",
     }).select("name price productImages category condition negotiable");
 
     res.status(200).json({

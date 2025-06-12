@@ -1,23 +1,25 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAdminStore } from "../../GlobalState/useAdminStore";
 
 const AdminApproveLayout = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const {
     getIndividualProductAdmin,
     individualProduct,
     loadingIndividualProduct,
   } = useAdminStore();
 
-  const { approveProduct, loadingResponse } = useAdminStore();
+  const { respondProduct, loadingResponse } = useAdminStore();
 
   useEffect(() => {
     getIndividualProductAdmin(productId);
   }, [productId, getIndividualProductAdmin]);
 
-  const handleApproval = () => {
-    approveProduct(individualProduct._id);
+  const handleApproval = async (status) => {
+    await respondProduct(individualProduct._id, status);
+    navigate("/admin/dashboard");
   };
 
   if (loadingIndividualProduct) {
@@ -100,7 +102,7 @@ const AdminApproveLayout = () => {
             {/* Add to Cart Button */}
             <div className="flex items-center gap-10">
               <button
-                onClick={handleApproval}
+                onClick={() => handleApproval("approved")}
                 className={`btn mt-6 w-fit bg-darksage border-0 shadow-none text-white ${
                   loadingResponse
                     ? "bg-gray-500 cursor-not-allowed"
@@ -110,7 +112,7 @@ const AdminApproveLayout = () => {
                 Approve
               </button>
               <button
-                // onClick={handleApproval}
+                onClick={() => handleApproval("rejected")}
                 className={`btn mt-6 w-fit bg-darksage border-0 shadow-none text-white ${
                   loadingResponse
                     ? "bg-gray-500 cursor-not-allowed"

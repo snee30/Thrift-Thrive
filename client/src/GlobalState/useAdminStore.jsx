@@ -24,19 +24,6 @@ export const useAdminStore = create((set) => ({
     }
   },
 
-  approveProduct: async (productId) => {
-    try {
-      set({ loadingResponse: true });
-      await axiosInstance.post(`/admin/product/approve/${productId}`);
-      toast.success("Product Approved!!");
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message || "Something went wrong");
-    } finally {
-      set({ loadingResponse: false });
-    }
-  },
-
   getIndividualProductAdmin: async (productId) => {
     try {
       set({ loadingIndividualProduct: true });
@@ -47,6 +34,19 @@ export const useAdminStore = create((set) => ({
       console.error("Failed to fetch individual product:", error);
     } finally {
       set({ loadingIndividualProduct: false });
+    }
+  },
+
+  respondProduct: async (productId, status) => {
+    try {
+      set({ loadingResponse: true });
+      await axiosInstance.post(`/admin/product/respond/${productId}`, status);
+      toast.success(res.data.message);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message || "Something went wrong");
+    } finally {
+      set({ loadingResponse: false });
     }
   },
 }));

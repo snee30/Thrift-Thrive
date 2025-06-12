@@ -3,7 +3,7 @@ import Product from "../Models/productModel.js";
 export async function getUnapprovedProducts(req, res) {
   try {
     const unapprovedProducts = await Product.find({
-      approved: false,
+      status: "pending",
     });
 
     res.status(200).json({
@@ -50,9 +50,17 @@ export const getProductByIdAdmin = async (req, res) => {
   }
 };
 
-export async function approveProducts(req, res) {
+export async function respondProducts(req, res) {
   try {
     const { productId } = req.params;
+    const { status } = req.body;
+
+    if (status !== "approved" && status !== "rejected") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status. Can only approve or reject products",
+      });
+    }
 
     const product = await Product.findById(productId);
 
@@ -65,13 +73,13 @@ export async function approveProducts(req, res) {
 
     const approvedProduct = await Product.findByIdAndUpdate(
       productId,
-      { approved: true },
+      { status: status },
       { new: true }
     );
 
     return res.status(200).json({
       success: true,
-      message: "Product Approved",
+      message: `Product ${status}`,
     });
   } catch (error) {
     console.log("Error in admin- Approve Products: ", error);
