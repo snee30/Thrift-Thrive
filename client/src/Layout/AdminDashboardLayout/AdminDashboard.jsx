@@ -2,17 +2,20 @@ import { useAdminStore } from "../../GlobalState/useAdminStore";
 import { useEffect } from "react";
 import IndividualProduct from "../ProductLayout/Component/IndividualProduct";
 import { Link } from "react-router-dom";
+import PaymentList from "./PaymentList";
 
 const AdminDashboard = () => {
   const {
     unapprovedProducts,
     loadingUnapprovedProducts,
     getUnapprovedProducts,
+    getPendingPayments,
   } = useAdminStore();
 
   useEffect(() => {
     getUnapprovedProducts();
-  }, [getUnapprovedProducts]);
+    getPendingPayments();
+  }, [getUnapprovedProducts, getPendingPayments]);
 
   if (loadingUnapprovedProducts) {
     return (
@@ -49,6 +52,11 @@ const AdminDashboard = () => {
         >
           View Rejected Products
         </Link>
+      </div>
+
+      <div>
+        <h1>Confirm the Payments</h1>
+        <PaymentList />
       </div>
     </div>
   );

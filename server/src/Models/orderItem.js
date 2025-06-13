@@ -15,7 +15,7 @@ const orderItemSchema = new mongoose.Schema(
     },
     seller: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Seller", // assuming sellers are users
+      ref: "Seller",
       required: true,
     },
     price: {
