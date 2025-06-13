@@ -9,39 +9,57 @@ const Checkout = () => {
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price || 0), 0);
 
   return (
-    <div className="pt-31 px-5 relative">
-      <h1 className="text-xl font-bold mb-4">Checkout</h1>
+    <div className="pt-35 px-4 flex justify-center ">
+      {" "}
+      <div className="w-full max-w-xl bg-sage rounded-2xl shadow-lg p-6">
+        <h1 className="text-2xl font-bold text-[#3e2723] mb-6 text-center">
+          Checkout
+        </h1>
 
-      {cartItems.length === 0 ? (
-        <div>The Cart is Empty</div>
-      ) : (
-        cartItems.map((item, index) => (
-          <div
-            key={index}
-            className="bg-gray-100 p-3 mb-2 rounded shadow flex justify-between items-center"
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="size-10 object-contain"
-            />
-            <h1 className="font-medium">{item.name}</h1>
-            <p className="font-bold text-sm">Rs.{item.price}</p>
+        {cartItems.length === 0 ? (
+          <div className="text-center text-[#7f5539] font-medium">
+            Your cart is empty.
           </div>
-        ))
-      )}
+        ) : (
+          cartItems.map((item, index) => (
+            <div
+              key={index}
+              className="bg-cream p-5 mb-5 rounded-2xl shadow-md flex items-center justify-between"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-12 h-12 object-contain rounded"
+              />
+              <div className="flex-1 px-4">
+                <h2 className="text-[#3e2723] font-medium">{item.name}</h2>
+              </div>
+              <p className="text-[#7f5539] font-semibold text-sm">
+                Rs. {item.price}
+              </p>
+            </div>
+          ))
+        )}
 
-      <p className="mt-4 font-semibold">Total Amount: Rs.{subtotal}</p>
-      <button
-        onClick={() => setShowForm(true)}
-        className="mt-4 btn btn-primary"
-      >
-        Proceed to Payment
-      </button>
+        {cartItems.length > 0 && (
+          <>
+            <div className="mt-6 text-right text-lg font-semibold text-[#3e2723]">
+              Total: Rs. {subtotal}
+            </div>
 
-      {showForm && (
-        <PaymentForm closeModal={() => setShowForm(false)} price={subtotal} />
-      )}
+            <button
+              onClick={() => setShowForm(true)}
+              className="mt-6 w-full bg-[#b08968] hover:bg-[#a1754d] text-white py-2 rounded-lg font-semibold transition duration-300"
+            >
+              Proceed to Payment
+            </button>
+          </>
+        )}
+
+        {showForm && (
+          <PaymentForm closeModal={() => setShowForm(false)} price={subtotal} />
+        )}
+      </div>
     </div>
   );
 };

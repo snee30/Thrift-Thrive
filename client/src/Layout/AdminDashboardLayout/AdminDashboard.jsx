@@ -16,21 +16,25 @@ const AdminDashboard = () => {
 
   if (loadingUnapprovedProducts) {
     return (
-      <div className="flex h-40 w-full justify-center items-center">
+      <div className="flex h-40 w-full justify-center items-center text-[#7f5539] text-lg font-medium">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="pt-21">
-      <h1>Welcome Sneha</h1>
+    <div className="pt-28 px-6 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold text-[#3e2723] mb-4">
+        Welcome, Sneha 👋
+      </h1>
 
-      <p>Unapproved Products</p>
+      <p className="text-lg text-[#5d4037] font-semibold mb-6">
+        Unapproved Products
+      </p>
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex flex-wrap gap-6 mb-8">
         {unapprovedProducts.length === 0 ? (
-          <div>No Products Pending</div>
+          <div className="text-[#7f5539] text-base">No Products Pending</div>
         ) : (
           unapprovedProducts.map((product, index) => (
             <IndividualProduct key={index} details={product} role="admin" />
@@ -38,7 +42,14 @@ const AdminDashboard = () => {
         )}
       </div>
 
-      <Link to={"/admin/rejected-products"}>View Rejected Products</Link>
+      <div className="mt-4">
+        <Link
+          to={"/admin/rejected-products"}
+          className="inline-block bg-[#b08968] hover:bg-[#a1754d] text-white px-5 py-2 rounded-lg font-medium transition duration-300"
+        >
+          View Rejected Products
+        </Link>
+      </div>
     </div>
   );
 };
