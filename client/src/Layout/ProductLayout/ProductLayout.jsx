@@ -10,8 +10,10 @@ const ProductLayout = () => {
   }, [getProducts]);
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-30">
-      <h1 className="text-3xl font-bold text-center mb-8">Our Products</h1>
+    <div className=" px-4 py-8 pt-30 bg-sage w-full min-h-screen ">
+      <h1 className="text-3xl font-bold mb-8  bg-cream text-center mt-5 rounded-lg p-4 shadow-md w-max mx-auto text-forestgreen">
+        Our Products
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.length === 0 ? (
           <div className="sm:col-span-2 md:col-span-3 lg:col-span-4 mx-auto">

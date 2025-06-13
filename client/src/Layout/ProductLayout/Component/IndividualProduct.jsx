@@ -15,7 +15,7 @@ const IndividualProduct = ({ details, role = "" }) => {
           ? `/admin/product/${details._id}`
           : `/product/${details._id}`
       }
-      className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
+      className="bg-cream rounded-lg shadow-md overflow-hidden border-darksage"
     >
       {/* DaisyUI Carousel */}
       <div className="carousel w-full h-60 relative">
@@ -47,6 +47,16 @@ const IndividualProduct = ({ details, role = "" }) => {
                 </a>
                 <a
                   href={`#slide-${uniqueId}-${(index + 1) % images.length}`}
+                  text-
+                  mb-4
+                  bg-cream
+                  text-center
+                  mt-10
+                  rounded-lg
+                  p-4
+                  shadow-md
+                  w-max
+                  mx-auto
                   className="btn btn-circle"
                 >
                   ❯
