@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axiosInstance";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 export const useAdminStore = create((set) => ({
   unapprovedProducts: [],
@@ -13,6 +14,10 @@ export const useAdminStore = create((set) => ({
 
   rejectedProducts: [],
   loadingRejectedProducts: false,
+
+  pendingPayments: [],
+
+  loadingPaymentAccept: false,
 
   getUnapprovedProducts: async () => {
     try {
@@ -66,6 +71,33 @@ export const useAdminStore = create((set) => ({
       console.error("Error fetching unapproved products: ", error);
     } finally {
       set({ loadingRejectedProducts: false });
+    }
+  },
+
+  getPendingPayments: async () => {
+    try {
+      const res = await axiosInstance.get("admin/payment/pending");
+      set({ pendingPayments: res.data.payments });
+    } catch (error) {
+      console.log("Error in fetching pending payments: ", error);
+    }
+  },
+
+  acceptPayment: async (paymentId) => {
+    try {
+      set({ loadingPaymentAccept: true });
+      const res = await axiosInstance.post(`admin/payment/accept/${paymentId}`);
+
+      set((state) => ({
+        pendingPayments: state.pendingPayments.filter(
+          (payment) => payment._id !== paymentId
+        ),
+      }));
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      set({ loadingPaymentAccept: false });
     }
   },
 }));

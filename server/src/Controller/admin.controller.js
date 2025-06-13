@@ -119,7 +119,10 @@ export async function getRejectedProducts(req, res) {
 
 export async function getPendingPayments(req, res) {
   try {
-    const pendingPayments = await Payment.find({ status: "pending" });
+    const pendingPayments = await Payment.find({ status: "pending" }).populate(
+      "buyer",
+      "name"
+    );
 
     res.status(200).json({
       success: true,
