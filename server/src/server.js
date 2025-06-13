@@ -5,10 +5,11 @@ import dotenv from "dotenv";
 import authRoutes from "./Routes/auth.routes.js";
 import sellerRoutes from "./Routes/seller.routes.js";
 import publicRoutes from "./Routes/public.routes.js";
-import adminRoutes from "./Routes/admin.routes.js";
 import cors from "cors";
+import adminRoutes from "./Routes/admin.routes.js";
 import cookieParser from "cookie-parser";
 import cartRoutes from "./Routes/cart.routes.js";
+import buyerRoutes from "./Routes/buyer.routes.js";
 
 import { connectDB } from "./lib/db.js";
 dotenv.config();
@@ -33,6 +34,7 @@ app.use("/api/seller", sellerRoutes);
 app.use("/api/public", publicRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/buyer", buyerRoutes);
 
 // app.use("/auth/buyer", buyerAuthRoutes);
 

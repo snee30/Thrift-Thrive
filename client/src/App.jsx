@@ -20,6 +20,7 @@ import AdminApproveLayout from "./Layout/AdminProductApproveLayout/AdminApproveL
 import RejectedProducts from "./Layout/RejectedProductLayout/RejectedProducts";
 import Checkout from "./Layout/CheckoutLayout/Checkout";
 import useCartStore from "./GlobalState/useCartStore";
+import BuyerOrder from "./Layout/BuyerOrderLayout/BuyerOrder";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -59,6 +60,16 @@ export default function App() {
 
         {/* Buyer Routing
          */}
+        <Route
+          path="/buyer/orders"
+          element={
+            !role || role === "admin" || role === "seller" ? (
+              <Navigate to="/signup/buyer" />
+            ) : (
+              <BuyerOrder />
+            )
+          }
+        />
         <Route
           path="/checkout"
           element={
