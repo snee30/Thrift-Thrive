@@ -92,6 +92,16 @@ export default function App() {
             )
           }
         />
+        <Route
+          path="/seller/orders"
+          element={
+            !role || role === "admin" || role === "buyer" ? (
+              <Navigate to="/signup/seller" />
+            ) : (
+              <BecomeASellerLayout />
+            )
+          }
+        />
 
         {/* Products Routing */}
         {/* Individual Product */}
