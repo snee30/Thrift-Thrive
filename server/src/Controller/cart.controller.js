@@ -5,7 +5,14 @@ import Payment from "../Models/paymentModel.js";
 
 export const addToCart = async (req, res) => {
   const { productId } = req.params;
-  const buyerId = req.buyer._id; // from auth middleware
+  const buyerId = req.buyer?._id || "";
+
+  if (!buyerId) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized - Buyer info is missing",
+    });
+  }
 
   try {
     let cart = await cartModel.findOne({ buyer: buyerId });
@@ -43,12 +50,13 @@ export const addToCart = async (req, res) => {
 
 export const viewCart = async (req, res) => {
   try {
-    const buyerId = req.buyer._id;
+    const buyerId = req.buyer?._id || "";
 
-    if (!req.buyer || !req.buyer._id) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Unauthorized: Buyer info missing" });
+    if (!buyerId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized - Buyer info is missing",
+      });
     }
 
     const cart = await cartModel
@@ -83,7 +91,14 @@ export const viewCart = async (req, res) => {
 // Remove an item from the cart
 export const removeFromCart = async (req, res) => {
   const { productId } = req.params;
-  const buyerId = req.buyer._id; // from token middleware
+  const buyerId = req.buyer?._id || ""; // from token middleware
+
+  if (!buyerId) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized - Buyer info is missing",
+    });
+  }
 
   try {
     const cart = await cartModel.findOne({ buyer: buyerId });
@@ -109,7 +124,14 @@ export const removeFromCart = async (req, res) => {
 
 export const checkoutCart = async (req, res) => {
   try {
-    const buyerId = req.buyer._id;
+    const buyerId = req.buyer?._id || "";
+    if (!buyerId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized - Buyer info is missing",
+      });
+    }
+
     const { delivery_location, buyer_phone, transactionId } = req.body;
 
     if (!delivery_location || !buyer_phone || !transactionId) {

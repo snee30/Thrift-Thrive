@@ -67,6 +67,8 @@ const PaymentForm = ({ closeModal, price }) => {
             </label>
             <input
               type="tel"
+              minLength={10}
+              maxLength={10}
               name="buyer_phone"
               value={formData.buyer_phone}
               onChange={handleChange}
