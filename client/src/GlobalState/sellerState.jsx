@@ -5,6 +5,11 @@ import toast from "react-hot-toast";
 const sellerState = create((set) => ({
   loading: false,
 
+  allProducts: [],
+
+  pendingProducts: [],
+  soldProducts: [],
+
   addProduct: async (data) => {
     try {
       set({ loading: true });
@@ -14,6 +19,47 @@ const sellerState = create((set) => ({
       toast.error(error.response.data.message || "Server Error!!!");
     } finally {
       set({ loading: false });
+    }
+  },
+
+  getProductStatus: async () => {
+    try {
+      const res = await axiosInstance.get("/seller/product-status");
+      set({ allProducts: res.data.products });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  updateProductStatus: async (productId, updateStatus) => {
+    try {
+      const res = await axiosInstance.post(
+        `/seller/update-status/${productId}`,
+        { updateStatus }
+      );
+
+      toast.success("Successfully Updated the Status");
+    } catch (error) {
+      console.log("error in uodate Product Status", error);
+      toast.error(error.response.data.message || "Something went wrong");
+    }
+  },
+
+  getPendingProducts: async () => {
+    try {
+      const res = await axiosInstance.get("/seller/products/pending");
+      set({ pendingProducts: res.data.products });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getSoldProducts: async () => {
+    try {
+      const res = await axiosInstance.get("/seller/products/sold");
+      set({ soldProducts: res.data.products });
+    } catch (error) {
+      console.log(error);
     }
   },
 }));

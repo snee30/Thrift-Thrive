@@ -21,6 +21,9 @@ import RejectedProducts from "./Layout/RejectedProductLayout/RejectedProducts";
 import Checkout from "./Layout/CheckoutLayout/Checkout";
 import useCartStore from "./GlobalState/useCartStore";
 import BuyerOrder from "./Layout/BuyerOrderLayout/BuyerOrder";
+import SellerProducts from "./Layout/SellerProductsLayout/SellerProducts";
+import PendingProducts from "./Layout/SellerProductsLayout/PendingProducts";
+import SoldProducts from "./Layout/SellerProductsLayout/SoldProducts";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -93,12 +96,32 @@ export default function App() {
           }
         />
         <Route
-          path="/seller/orders"
+          path="/seller/products"
           element={
             !role || role === "admin" || role === "buyer" ? (
               <Navigate to="/signup/seller" />
             ) : (
-              <BecomeASellerLayout />
+              <SellerProducts />
+            )
+          }
+        />
+        <Route
+          path="/seller/products/pending"
+          element={
+            !role || role === "admin" || role === "buyer" ? (
+              <Navigate to="/signup/seller" />
+            ) : (
+              <PendingProducts />
+            )
+          }
+        />
+        <Route
+          path="/seller/products/sold"
+          element={
+            !role || role === "admin" || role === "buyer" ? (
+              <Navigate to="/signup/seller" />
+            ) : (
+              <SoldProducts />
             )
           }
         />
