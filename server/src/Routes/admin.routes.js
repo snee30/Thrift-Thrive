@@ -5,8 +5,10 @@ import {
   getPendingPayments,
   getProductByIdAdmin,
   getRejectedProducts,
+  getSellerPendingPayments,
   getUnapprovedProducts,
   respondProducts,
+  updateSellerPayment,
 } from "../Controller/admin.controller.js";
 
 const router = Router();
@@ -21,4 +23,6 @@ router.get("/products/rejected", getRejectedProducts);
 router.get("/payment/pending", getPendingPayments);
 router.post("/payment/accept/:paymentId", acceptPayment);
 
+router.get("/payment/seller/pending", getSellerPendingPayments);
+router.post("/payment/seller/accept/:paymentId", updateSellerPayment);
 export default router;

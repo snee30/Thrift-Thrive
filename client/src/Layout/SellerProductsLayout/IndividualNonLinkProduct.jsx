@@ -65,6 +65,14 @@ const IndividualNonLinkProduct = ({ details }) => {
           <span className="font-medium">Negotiable:</span>{" "}
           {details.negotiable ? "Yes" : "No"}
         </p>
+        <p className="text-sm text-gray-500">
+          <span className="font-medium">Status:</span>{" "}
+          <span
+            className={`${details.status === "rejected" ? "text-red-700" : ""}`}
+          >
+            {details.status}
+          </span>
+        </p>
       </div>
     </div>
   );

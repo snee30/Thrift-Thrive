@@ -38,6 +38,7 @@ const sellerState = create((set) => ({
         { updateStatus }
       );
 
+      await sellerState.getState().getProductStatus();
       toast.success("Successfully Updated the Status");
     } catch (error) {
       console.log("error in uodate Product Status", error);

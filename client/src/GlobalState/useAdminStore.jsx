@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axiosInstance";
 import toast from "react-hot-toast";
-import axios from "axios";
 
 export const useAdminStore = create((set) => ({
   unapprovedProducts: [],
@@ -18,6 +17,8 @@ export const useAdminStore = create((set) => ({
   pendingPayments: [],
 
   loadingPaymentAccept: false,
+
+  pendingSellerPayments: [],
 
   getUnapprovedProducts: async () => {
     try {
@@ -98,6 +99,32 @@ export const useAdminStore = create((set) => ({
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
       set({ loadingPaymentAccept: false });
+    }
+  },
+
+  getPendingSellerPayments: async () => {
+    try {
+      const res = await axiosInstance.get("admin/payment/seller/pending");
+      set({ pendingSellerPayments: res.data.payments });
+    } catch (error) {
+      console.log("Error in fetching pending seller payments: ", error);
+    }
+  },
+
+  payToSeller: async (paymentId) => {
+    try {
+      const res = await axiosInstance.post(
+        `admin/payment/seller/accept/${paymentId}`
+      );
+
+      set((state) => ({
+        pendingSellerPayments: state.pendingSellerPayments.filter(
+          (payment) => payment._id !== paymentId
+        ),
+      }));
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   },
 }));
