@@ -41,7 +41,7 @@ function PaymentCard({ payment }) {
         <h2 className="text-sm text-gray-500">
           Payment by:{" "}
           <span className="text-base font-semibold text-gray-800">
-            {payment.name}
+            {payment.buyer.name}
           </span>
         </h2>
       </div>
