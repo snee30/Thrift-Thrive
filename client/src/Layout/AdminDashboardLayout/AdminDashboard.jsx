@@ -22,14 +22,14 @@ const AdminDashboard = () => {
 
   if (loadingUnapprovedProducts) {
     return (
-      <div className="flex h-40 w-full justify-center items-center text-[var(--forestgreen)] text-lg font-medium">
+      <div className="flex h-40 w-full justify-center items-center text-forestgreen text-lg font-medium">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="pt-28 px-6 w-full mx-auto min-h-screen bg-[var(--sage)]">
+    <div className="pt-28 px-6 w-full mx-auto min-h-screen bg-sage">
       {/* Welcome Message */}
       <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
         Welcome {user.name.split(" ")[0]} to your Dashboard
@@ -37,14 +37,22 @@ const AdminDashboard = () => {
 
       {/* Unapproved Products Section */}
       <div className="mt-12">
-        <h2 className="text-xl font-semibold text-[#5d4037] mb-4 bg-[var(--cream)] rounded-lg p-3 shadow w-max">
-          Unapproved Products
-        </h2>
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="text-xl font-semibold text-brown bg-[var(--cream)] rounded-lg p-3 shadow">
+            Unapproved Products
+          </h2>
+          <Link
+            to="/admin/rejected-products"
+            className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+          >
+            View Rejected
+          </Link>
+        </div>
 
-        <div className="flex flex-wrap gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {unapprovedProducts.length === 0 ? (
-            <div className="text-[var(--forestgreen)] text-base">
-              No products pending at the moment
+            <div className="text-forestgreen text-base col-span-full">
+              No products pending at the moment.
             </div>
           ) : (
             unapprovedProducts.map((product, index) => (
@@ -52,25 +60,11 @@ const AdminDashboard = () => {
             ))
           )}
         </div>
-
-        {/* Rejected Products Link */}
-        <div className="mt-6">
-          <Link
-            to={"/admin/rejected-products"}
-            className="text-md text-[#5d4037] font-medium bg-[var(--cream)] px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition"
-          >
-            View Rejected Products
-          </Link>
-        </div>
       </div>
 
       {/* Payments Section */}
-      <div className="mt-14">
-        <h2 className="text-xl font-semibold text-[#5d4037] mb-4 bg-[var(--cream)] rounded-lg p-3 shadow w-max">
-          Confirm the Payments
-        </h2>
-        <PaymentList />
-      </div>
+
+      <PaymentList />
     </div>
   );
 };

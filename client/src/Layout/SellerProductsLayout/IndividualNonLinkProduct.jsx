@@ -7,36 +7,38 @@ const IndividualNonLinkProduct = ({ details }) => {
   const uniqueId = details._id;
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
+    <div className="pt-40 bg-sage rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
       {/* Carousel */}
-      <div className="carousel w-full h-60 relative bg-[var(--sage)]">
+      <div className="carousel w-full h-60 relative bg-[var(--sage)] flex items-center justify-center">
         {images.map((image, index) => (
           <div
             key={image.public_id || index}
             id={`slide-${uniqueId}-${index}`}
-            className="carousel-item relative w-full"
+            className="carousel-item relative w-full h-60 flex items-center justify-center"
           >
             <img
               src={image.url}
               alt={`product-${index}`}
-              className="w-full h-60 object-contain rounded-t-2xl"
+              className="max-h-full max-w-full object-contain transition duration-300"
             />
+
+            {/* Navigation Buttons */}
             {images.length > 1 && (
               <div
-                className="absolute left-4 right-4 top-1/2 flex justify-between transform -translate-y-1/2"
+                className="absolute left-0 right-0 top-1/2 flex justify-between px-4 transform -translate-y-1/2"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
                   href={`#slide-${uniqueId}-${
                     (index - 1 + images.length) % images.length
                   }`}
-                  className="btn btn-xs btn-circle bg-white text-[var(--sage)] border-none shadow"
+                  className="btn btn-sm btn-circle bg-white text-[var(--sage)] border border-[var(--darksage)] shadow hover:scale-110 transition"
                 >
                   ❮
                 </a>
                 <a
                   href={`#slide-${uniqueId}-${(index + 1) % images.length}`}
-                  className="btn btn-xs btn-circle bg-white text-[var(--sage)] border-none shadow"
+                  className="btn btn-sm btn-circle bg-white text-[var(--sage)] border border-[var(--darksage)] shadow hover:scale-110 transition"
                 >
                   ❯
                 </a>
