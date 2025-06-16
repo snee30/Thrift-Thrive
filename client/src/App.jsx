@@ -24,6 +24,7 @@ import BuyerOrder from "./Layout/BuyerOrderLayout/BuyerOrder";
 import SellerProducts from "./Layout/SellerProductsLayout/SellerProducts";
 import PendingProducts from "./Layout/SellerProductsLayout/PendingProducts";
 import SoldProducts from "./Layout/SellerProductsLayout/SoldProducts";
+import SellerPayment from "./Layout/AdminDashboardLayout/SellerPayment";
 
 export default function App() {
   const { checkAuth, role, checkAuthLoading } = authState();
@@ -141,6 +142,16 @@ export default function App() {
               <Navigate to="/" />
             ) : (
               <AdminDashboard />
+            )
+          }
+        />
+        <Route
+          path="/admin/dashboard/seller-payments"
+          element={
+            !role || role === "seller" || role === "buyer" ? (
+              <Navigate to="/" />
+            ) : (
+              <SellerPayment />
             )
           }
         />

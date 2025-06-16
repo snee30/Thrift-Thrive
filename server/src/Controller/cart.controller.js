@@ -141,6 +141,13 @@ export const checkoutCart = async (req, res) => {
       });
     }
 
+    if (!/^[0-9]{10}$/.test(buyer_phone)) {
+      return res.status(400).json({
+        success: false,
+        message: "Phone number must be exactly 10 digits",
+      });
+    }
+
     const cart = await cartModel.findOne({ buyer: buyerId }).populate("items");
 
     if (!cart || cart.items.length === 0) {
@@ -191,7 +198,7 @@ export const checkoutCart = async (req, res) => {
     await Payment.create({
       order: order._id,
       buyer: buyerId,
-      amount: totalAmount,
+      amount: totalAmount + 100,
       transactionId,
       method: "QR",
       paid_at: new Date(),

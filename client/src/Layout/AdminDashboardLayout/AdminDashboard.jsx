@@ -31,8 +31,8 @@ const AdminDashboard = () => {
   return (
     <div className="pt-28 px-6 w-full mx-auto min-h-screen bg-sage">
       {/* Welcome Message */}
-      <h1 className="text-3xl font-bold text-forestgreen bg-cream text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
-        Welcome {user.name} to the Dashboard
+      <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
+        Welcome {user.name.split(" ")[0]} to your Dashboard
       </h1>
 
       {/* Unapproved Products Section */}

@@ -189,3 +189,74 @@ export async function acceptPayment(req, res) {
     });
   }
 }
+
+export async function getSellerPendingPayments(req, res) {
+  try {
+    let pendingSellerPayments = await SellerPayment.find({
+      is_paid: false,
+    })
+      .populate("seller", "name phone")
+      .populate({
+        path: "orderItem",
+        populate: {
+          path: "product",
+          select: "name productImages", // we need `images` to get index 0
+        },
+      });
+
+    // Map to include only the first image URL from images array
+    pendingSellerPayments = pendingSellerPayments.map((payment) => {
+      const product = payment.orderItem?.product;
+
+      const imageUrl =
+        product?.productImages && product.productImages.length > 0
+          ? product.productImages[0].url
+          : null;
+
+      return {
+        ...payment.toObject(),
+        orderItem: {
+          ...payment.orderItem.toObject(),
+          product: {
+            name: product?.name,
+            imageUrl, // Only the first image URL
+          },
+        },
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      payments: pendingSellerPayments,
+    });
+  } catch (error) {
+    console.log("Error in admin - get seller pending payments: ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+}
+
+export async function updateSellerPayment(req, res) {
+  try {
+    const { paymentId } = req.params;
+
+    await SellerPayment.findByIdAndUpdate(
+      paymentId,
+      { is_paid: true, paid_at: new Date() },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Seller Paid Successfully",
+    });
+  } catch (error) {
+    console.log("Error in admin- update seller payment: ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+}

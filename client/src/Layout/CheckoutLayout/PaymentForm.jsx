@@ -101,6 +101,13 @@ const PaymentForm = ({ closeModal, price }) => {
               Total Amount: Rs. {price}
             </p>
 
+            <p className="text-right text-[#3e2723] font-semibold mb-4">
+              Delivery Charge: Rs. 100
+            </p>
+            <p className="text-right text-[#3e2723] font-semibold mb-4">
+              Grand Total: Rs. {price + 100}
+            </p>
+
             <button
               type="submit"
               className="w-full bg-[#b08968] hover:bg-[#a1754d] text-white py-2 rounded-lg font-semibold transition duration-300"

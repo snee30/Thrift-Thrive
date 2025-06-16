@@ -44,7 +44,13 @@ const Checkout = () => {
         {cartItems.length > 0 && (
           <>
             <div className="mt-6 text-right text-lg font-semibold text-[#3e2723]">
-              Total: Rs. {subtotal}
+              Total Price: Rs. {subtotal}
+            </div>
+            <div className="mt-6 text-right text-lg font-semibold text-[#3e2723]">
+              Delivery: Rs. 100
+            </div>
+            <div className="mt-6 text-right text-lg font-semibold text-[#3e2723]">
+              Grand Total: Rs. {subtotal + 100}
             </div>
 
             <button
