@@ -7,9 +7,9 @@ const IndividualNonLinkProduct = ({ details }) => {
   const uniqueId = details._id;
 
   return (
-    <div className="bg-cream rounded-lg shadow-md overflow-hidden border-darksage">
-      {/* DaisyUI Carousel */}
-      <div className="carousel w-full h-60 relative">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
+      {/* Carousel */}
+      <div className="carousel w-full h-60 relative bg-[var(--sage)]">
         {images.map((image, index) => (
           <div
             key={image.public_id || index}
@@ -19,36 +19,24 @@ const IndividualNonLinkProduct = ({ details }) => {
             <img
               src={image.url}
               alt={`product-${index}`}
-              className="w-full h-60 object-contain"
+              className="w-full h-60 object-contain rounded-t-2xl"
             />
             {images.length > 1 && (
               <div
-                className="absolute left-5 right-5 top-1/2 flex justify-between transform -translate-y-1/2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
+                className="absolute left-4 right-4 top-1/2 flex justify-between transform -translate-y-1/2"
+                onClick={(e) => e.stopPropagation()}
               >
                 <a
                   href={`#slide-${uniqueId}-${
                     (index - 1 + images.length) % images.length
                   }`}
-                  className="btn btn-circle"
+                  className="btn btn-xs btn-circle bg-white text-[var(--sage)] border-none shadow"
                 >
                   ❮
                 </a>
                 <a
                   href={`#slide-${uniqueId}-${(index + 1) % images.length}`}
-                  text-
-                  mb-4
-                  bg-cream
-                  text-center
-                  mt-10
-                  rounded-lg
-                  p-4
-                  shadow-md
-                  w-max
-                  mx-auto
-                  className="btn btn-circle"
+                  className="btn btn-xs btn-circle bg-white text-[var(--sage)] border-none shadow"
                 >
                   ❯
                 </a>
@@ -58,18 +46,24 @@ const IndividualNonLinkProduct = ({ details }) => {
         ))}
       </div>
 
-      {/* Product Details */}
+      {/* Product Info */}
       <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{details.name}</h3>
-        <p className="text-gray-600 text-sm mb-1">
-          Category: {details.category}
-        </p>
-        <p className="text-gray-800 font-bold mb-1">Rs.{details.price}</p>
+        <h3 className="text-xl font-semibold text-[var(--darkgreen)] mb-2">
+          {details.name}
+        </h3>
         <p className="text-sm text-gray-500 mb-1">
-          Condition: {details.condition}
+          <span className="font-medium text-gray-700">Category:</span>{" "}
+          {details.category}
+        </p>
+        <p className="text-lg font-bold text-gray-800 mb-1">
+          Rs. {details.price}
+        </p>
+        <p className="text-sm text-gray-500 mb-1">
+          <span className="font-medium">Condition:</span> {details.condition}
         </p>
         <p className="text-sm text-gray-500">
-          Negotiable: {details.negotiable ? "Yes" : "No"}
+          <span className="font-medium">Negotiable:</span>{" "}
+          {details.negotiable ? "Yes" : "No"}
         </p>
       </div>
     </div>
