@@ -7,9 +7,9 @@ const IndividualNonLinkProduct = ({ details }) => {
   const uniqueId = details._id;
 
   return (
-    <div className="pt-40 bg-sage rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
+    <div className="pt-5 bg-white rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
       {/* Carousel */}
-      <div className="carousel w-full h-60 relative bg-[var(--sage)] flex items-center justify-center">
+      <div className="carousel w-full h-60 relative bg-white flex items-center justify-center">
         {images.map((image, index) => (
           <div
             key={image.public_id || index}
@@ -49,7 +49,7 @@ const IndividualNonLinkProduct = ({ details }) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-4 ">
         <h3 className="text-xl font-semibold text-[var(--darkgreen)] mb-2">
           {details.name}
         </h3>

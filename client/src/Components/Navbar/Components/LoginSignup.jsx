@@ -6,10 +6,10 @@ const LoginSignup = () => {
   const { user, role, logout } = authState();
 
   return (
-    <div className="flex flex-row gap-5 items-center justify-center h-full text-darkbrown">
+    <div className="flex flex-row gap-5 items-center justify-center h-full text-darkbrown ">
       {user ? (
         <div>
-          <div className="dropdown dropdown-start">
+          <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
@@ -38,17 +38,17 @@ const LoginSignup = () => {
         </div>
       ) : (
         <div>
-          <div className="dropdown dropdown-start">
+          <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
-              className="btn text-brown m-1 bg-sage border-0 p-2 rounded-lg"
+              className="btn text-brown m-2 bg-sage border-0 p-3 rounded-lg"
             >
               Login/Signup
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-sage rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu bg-sage rounded-box z-1 w-52 p-2 shadow-sm text-brown"
             >
               <li>
                 <Link to={"/login/buyer"}>As a Buyer</Link>
