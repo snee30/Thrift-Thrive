@@ -3,7 +3,7 @@ import Order from "../Models/orderModel.js";
 
 export async function getGroupedOrders(req, res) {
   try {
-    const orders = await Order.find()
+    const orders = await Order.find({ buyer: req.buyer._id })
       .sort({ createdAt: -1 }) // latest orders first
       .lean();
 

@@ -28,7 +28,17 @@ const LoginSignup = () => {
               className="dropdown-content menu bg-sage rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
-                <Link to={`/${role}/update-profile`}>Update Profile</Link>
+                <Link
+                  to={
+                    role === "admin"
+                      ? "/admin/dashboard"
+                      : role === "seller"
+                      ? "/seller/products"
+                      : "/buyer/orders"
+                  }
+                >
+                  Dashboard
+                </Link>
               </li>
               <li onClick={logout}>
                 <div>Logout</div>

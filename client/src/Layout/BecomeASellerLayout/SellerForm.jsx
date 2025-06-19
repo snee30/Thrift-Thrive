@@ -77,16 +77,19 @@ const SellerForm = () => {
       productImages: images,
     };
 
-    addProduct(formData);
+    const resp = addProduct(formData);
     // Reset
-    // setProductName("");
-    // setProductDescription("");
-    // setDressCondition("");
-    // setCategory("");
-    // setNegotiable(false);
-    // setPrice("");
-    // setImages([]);
-    // setImagePreviews([]);
+
+    if (resp) {
+      setProductName("");
+      setProductDescription("");
+      setDressCondition("");
+      setCategory("");
+      setNegotiable(false);
+      setPrice("");
+      setImages([]);
+      setImagePreviews([]);
+    }
   };
   if (loading) {
     return (

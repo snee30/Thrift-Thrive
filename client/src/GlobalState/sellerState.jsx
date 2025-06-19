@@ -15,8 +15,10 @@ const sellerState = create((set) => ({
       set({ loading: true });
       const res = await axiosInstance.post("seller/add-product", data);
       toast.success(res.data.message);
+      return true;
     } catch (error) {
       toast.error(error.response.data.message || "Server Error!!!");
+      return false;
     } finally {
       set({ loading: false });
     }
@@ -33,10 +35,9 @@ const sellerState = create((set) => ({
 
   updateProductStatus: async (productId, updateStatus) => {
     try {
-      const res = await axiosInstance.post(
-        `/seller/update-status/${productId}`,
-        { updateStatus }
-      );
+      await axiosInstance.post(`/seller/update-status/${productId}`, {
+        updateStatus,
+      });
 
       await sellerState.getState().getProductStatus();
       toast.success("Successfully Updated the Status");

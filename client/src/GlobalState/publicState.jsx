@@ -6,6 +6,7 @@ const usePublicState = create((set) => ({
   products: [],
   individualProduct: null,
   loadingIndividualProduct: true,
+  selectedCategory: "",
 
   getProducts: async () => {
     try {
@@ -16,6 +17,19 @@ const usePublicState = create((set) => ({
       console.error("Failed to fetch products:", error);
     }
   },
+
+  getProductsByCategory: async (category) => {
+    try {
+      const response = await axiosInstance.get(`/public/category/${category}`);
+      set({
+        products: response.data.products,
+      });
+    } catch (error) {
+      console.log("Failed to fetch products by category:", error);
+    }
+  },
+
+  setSelectedCategory: (category) => set({ selectedCategory: category }),
 
   getIndividualProduct: async (productId) => {
     try {
