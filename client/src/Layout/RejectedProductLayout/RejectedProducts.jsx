@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useAdminStore } from "../../GlobalState/useAdminStore";
 import IndividualProduct from "../ProductLayout/Component/IndividualProduct";
+import { Link } from "react-router-dom";
 
 const RejectedProducts = () => {
   const { getRejectedProducts, rejectedProducts, loadingRejectedProducts } =
@@ -13,9 +14,23 @@ const RejectedProducts = () => {
 
   return (
     <div className="pt-28 px-6  mx-auto bg-sage min-h-screen w-100%">
-      <h1 className="text-3xl text-forestgreen font-bold text- mb-4 bg-cream text-center mt-10 rounded-lg p-4 shadow-md w-max mx-auto">
-        Rejected Products
-      </h1>
+      <div className="flex">
+        <Link
+          to="/admin/dashboard"
+          className="text-xl text-cream h-max font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          Dashboard
+        </Link>
+        <h1 className="text-3xl text-forestgreen font-bold text- mb-4 bg-cream text-center mt-10 rounded-lg p-4 shadow-md w-max mx-auto">
+          Rejected Products
+        </h1>
+        <Link
+          to="/admin/dashboard/seller-payments"
+          className="text-xl  text-cream h-max font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          View Pending Seller Payments
+        </Link>
+      </div>
 
       {loadingRejectedProducts ? (
         <div className="text-center text-[#7f5539] text-lg font-medium animate-pulse">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAdminStore } from "../../GlobalState/useAdminStore";
 import { useEffect } from "react";
 
@@ -15,9 +16,23 @@ const SellerPayment = () => {
 
   return (
     <div className="pt-35 px-6 bg-sage min-h-screen">
-      <h1 className="text-2xl sm:text-3xl font-bold text-[var(--forestgreen)] text-center bg-[var(--cream)] p-4 rounded-xl shadow w-max mx-auto mb-10">
-        Pending Seller Payments
-      </h1>
+      <div className="flex">
+        <Link
+          to="/admin/dashboard"
+          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          Dashboard
+        </Link>
+        <Link
+          to="/admin/rejected-products"
+          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          View Rejected products
+        </Link>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--forestgreen)] text-center bg-[var(--cream)] p-4 rounded-xl shadow w-max mx-auto mb-10">
+          Pending Seller Payments
+        </h1>
+      </div>
 
       <div className="grid gap-6 max-w-4xl mx-auto">
         {pendingSellerPayments.length === 0 ? (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sellerState from "../../GlobalState/sellerState";
 import { MdOutlineClose } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const SellerProducts = () => {
   const { getProductStatus, allProducts, updateProductStatus } = sellerState();
@@ -35,9 +36,23 @@ const SellerProducts = () => {
   return (
     <div className="bg-sage min-h-screen px-6 py-28">
       {/* Page Heading */}
-      <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
-        Seller Products
-      </h1>
+      <div className="flex">
+        <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
+          Seller Products
+        </h1>
+        <Link
+          to="/seller/products/pending"
+          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          Pending | Rejected Products
+        </Link>
+        <Link
+          to="/seller/products/sold"
+          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+        >
+          Your Sold Products
+        </Link>
+      </div>
 
       {/* Product Grid */}
       <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

@@ -45,7 +45,13 @@ const AdminDashboard = () => {
             to="/admin/rejected-products"
             className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
           >
-            View Rejected
+            View Rejected Products
+          </Link>
+          <Link
+            to="/admin/dashboard/seller-payments"
+            className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+          >
+            View Pending Seller Payments
           </Link>
         </div>
 
