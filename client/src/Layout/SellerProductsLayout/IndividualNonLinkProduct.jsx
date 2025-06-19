@@ -7,7 +7,7 @@ const IndividualNonLinkProduct = ({ details }) => {
   const uniqueId = details._id;
 
   return (
-    <div className="pt-5 bg-white rounded-2xl shadow-md overflow-hidden border border-[var(--darksage)] hover:shadow-lg transition duration-300">
+    <div className="pt-5 bg-white rounded-2xl shadow-md overflow-hidden border border-sage hover:shadow-lg transition duration-300">
       {/* Carousel */}
       <div className="carousel w-full h-60 relative bg-white flex items-center justify-center">
         {images.map((image, index) => (
