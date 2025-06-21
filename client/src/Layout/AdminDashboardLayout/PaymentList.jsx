@@ -9,7 +9,7 @@ export default function PaymentList() {
   }, [getPendingPayments]);
 
   return (
-    <div className="min-h-screen pt-28 px-6 bg-[var(--sage)]">
+    <div className="min-h-screen pt-38 px-6 bg-[var(--sage)]">
       <h1 className="text-2xl font-bold text-[var(--forestgreen)] mb-6">
         Pending Payments
       </h1>

@@ -24,7 +24,7 @@ const IndividualProductClick = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 flex justify-center items-center p-6">
+    <div className="min-h-screen flex justify-center items-center p-6 bg-sage">
       {individualProduct ? (
         <div className="bg-base-100 rounded-xl shadow-xl p-6 w-full max-w-5xl flex flex-col md:flex-row gap-6">
           {/* Left: Image Carousel */}

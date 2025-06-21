@@ -35,23 +35,26 @@ const SellerProducts = () => {
 
   return (
     <div className="bg-sage min-h-screen px-6 py-28">
-      {/* Page Heading */}
-      <div className="flex">
-        <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto">
+      {/* Page Heading and Links */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h1 className="text-3xl font-bold text-[var(--forestgreen)] bg-[var(--cream)] text-center mt-6 rounded-xl p-4 shadow-md w-max mx-auto md:mx-0">
           Seller Products
         </h1>
-        <Link
-          to="/seller/products/pending"
-          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
-        >
-          Pending | Rejected Products
-        </Link>
-        <Link
-          to="/seller/products/sold"
-          className="text-xl  text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
-        >
-          Your Sold Products
-        </Link>
+
+        <div className="flex gap-4 mt-4 md:mt-6 justify-center md:justify-end">
+          <Link
+            to="/seller/products/pending"
+            className="text-xl text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+          >
+            Pending / Rejected Products
+          </Link>
+          <Link
+            to="/seller/products/sold"
+            className="text-xl text-cream font-medium bg-brown px-4 py-2 rounded-lg shadow hover:shadow-lg transition"
+          >
+            Your Sold Products
+          </Link>
+        </div>
       </div>
 
       {/* Product Grid */}
